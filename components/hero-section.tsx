@@ -14,7 +14,7 @@ export function HeroSection({ onContact }: { onContact?: () => void }) {
       />
 
       {/* Content — flex col on mobile, grid on desktop */}
-      <div className="relative z-10 flex-1 w-full max-w-7xl mx-auto px-5 md:px-6 lg:px-10 flex flex-col lg:grid lg:grid-cols-2 lg:gap-4 lg:items-center lg:py-8">
+      <div className="relative z-10 flex-1 w-full max-w-7xl mx-auto px-5 md:px-6 lg:px-10 flex flex-col justify-between lg:grid lg:grid-cols-2 lg:gap-4 lg:items-center lg:py-8">
 
         {/* Text content */}
         <motion.div
@@ -109,7 +109,7 @@ export function HeroSection({ onContact }: { onContact?: () => void }) {
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-          className="order-2 flex-1 lg:flex-none relative lg:h-[680px] min-h-[55vh] lg:min-h-0 w-full"
+          className="order-2 relative h-[55vh] lg:h-[680px] w-full"
         >
           <div className="spline-wrapper w-full h-full">
             <SplineScene
