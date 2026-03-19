@@ -156,7 +156,7 @@ function Navbar({ onContact }: { onContact: () => void }) {
 function Marquee() {
   const items = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS]
   return (
-    <div className="border-y border-[#111] bg-[#0C0C0C] py-4 overflow-hidden">
+    <div className="border-y border-[#111] bg-[#0C0C0C] py-3 overflow-hidden">
       <div className="flex gap-12 marquee-track whitespace-nowrap">
         {items.map((item, i) => (
           <span key={i} className="inline-flex items-center gap-4 text-sm text-[#999] tracking-[0.2em] uppercase shrink-0" style={{ fontFamily: "var(--font-outfit)" }}>
@@ -180,9 +180,9 @@ function LeistungenSection() {
   ]
 
   return (
-    <section id="leistungen" className="py-16 md:py-32 bg-[#060606] border-t border-[#111]">
+    <section id="leistungen" className="py-6 md:py-10 md:py-32 bg-[#060606] border-t border-[#111]">
       <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-10">
-        <div className="mb-10 md:mb-16">
+        <div className="mb-7 md:mb-16">
           <span className="text-[#CAFF00] text-xs tracking-[0.3em] uppercase inline-flex items-center gap-3" style={{ fontFamily: "var(--font-outfit)" }}>
             <span className="w-8 h-px bg-[#CAFF00]" />Leistungen
           </span>
@@ -195,7 +195,7 @@ function LeistungenSection() {
           {items.map((item) => (
             <motion.div
               key={item.num}
-              className="group bg-[#060606] p-6 md:p-8 flex flex-col gap-3 md:gap-4 hover:bg-[#0C0C0C] active:bg-[#0C0C0C] transition-colors cursor-default touch-manipulation"
+              className="group bg-[#060606] p-5 md:p-8 flex flex-col gap-2 md:gap-4 hover:bg-[#0C0C0C] active:bg-[#0C0C0C] transition-colors cursor-default touch-manipulation"
               whileHover={{ y: -2 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
@@ -221,9 +221,9 @@ function StylesSection({ onContact }: { onContact: () => void }) {
   const [selected, setSelected] = useState<string | null>(null)
 
   return (
-    <section id="styles" className="py-16 md:py-32 bg-[#080808]">
+    <section id="styles" className="py-6 md:py-10 md:py-32 bg-[#080808]">
       <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-10">
-        <div className="mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div className="mb-7 md:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
             <span className="text-[#CAFF00] text-xs tracking-[0.3em] uppercase inline-flex items-center gap-3" style={{ fontFamily: "var(--font-outfit)" }}>
               <span className="w-8 h-px bg-[#CAFF00]" />Design Stile
@@ -245,7 +245,7 @@ function StylesSection({ onContact }: { onContact: () => void }) {
                 key={style.id}
                 onClick={() => setSelected(isSelected ? null : style.id)}
                 whileTap={{ scale: 0.98 }}
-                className="group relative bg-[#080808] p-8 flex flex-col gap-6 cursor-pointer transition-colors"
+                className="group relative bg-[#080808] p-5 md:p-8 flex flex-col gap-4 md:gap-6 cursor-pointer transition-colors"
                 style={{ backgroundColor: isSelected ? "#0E0E0E" : undefined }}
               >
                 {/* Selected border */}
@@ -260,7 +260,7 @@ function StylesSection({ onContact }: { onContact: () => void }) {
                 )}
 
                 {/* Mini preview */}
-                <div className="w-full h-40 rounded-sm overflow-hidden flex items-center justify-center relative" style={{ backgroundColor: style.bg }}>
+                <div className="w-full h-28 md:h-40 rounded-sm overflow-hidden flex items-center justify-center relative" style={{ backgroundColor: style.bg }}>
                   <div className="absolute inset-0 flex flex-col gap-2 p-4 justify-end">
                     <div className="w-2/3 h-3 rounded-full" style={{ backgroundColor: style.text, opacity: 0.15 }} />
                     <div className="w-1/2 h-2 rounded-full" style={{ backgroundColor: style.text, opacity: 0.08 }} />
@@ -311,9 +311,9 @@ function ProjectsSection() {
   const [lightbox, setLightbox] = useState<typeof PROJECTS[number] | null>(null)
 
   return (
-    <section id="projects" className="py-16 md:py-32 bg-[#060606]">
+    <section id="projects" className="py-6 md:py-10 md:py-32 bg-[#060606]">
       <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-10">
-        <div className="mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div className="mb-7 md:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
             <span className="text-[#CAFF00] text-xs tracking-[0.3em] uppercase inline-flex items-center gap-3" style={{ fontFamily: "var(--font-outfit)" }}>
               <span className="w-8 h-px bg-[#CAFF00]" />Ausgewählte Arbeiten
@@ -417,7 +417,7 @@ function ProjectsSection() {
 
 function CtaSection({ onContact }: { onContact: () => void }) {
   return (
-    <section id="contact" className="py-16 md:py-32 bg-[#080808] border-t border-[#111]">
+    <section id="contact" className="py-6 md:py-10 md:py-32 bg-[#080808] border-t border-[#111]">
       <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-10 text-center">
         <span className="text-[#CAFF00] text-xs tracking-[0.3em] uppercase inline-flex items-center justify-center gap-3 mb-6" style={{ fontFamily: "var(--font-outfit)" }}>
           <span className="w-8 h-px bg-[#CAFF00]" />Bereit loszulegen?<span className="w-8 h-px bg-[#CAFF00]" />
@@ -447,7 +447,7 @@ function CtaSection({ onContact }: { onContact: () => void }) {
 
 function Footer({ onContact }: { onContact: () => void }) {
   return (
-    <footer className="border-t border-[#111] bg-[#060606] py-10">
+    <footer className="border-t border-[#111] bg-[#060606] py-6 md:py-10">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col md:flex-row items-center justify-between gap-4">
         <span className="text-[#F0EDE8] font-bold text-base" style={{ fontFamily: "var(--font-syne)" }}>
           DigitalFrame
