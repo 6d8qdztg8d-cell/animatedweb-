@@ -18,6 +18,12 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: "Web Studio — Moderne Digitale Erlebnisse",
   description: "Premium Web Development mit interaktiven 3D-Erlebnissen",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
 }
 
 export default function RootLayout({
