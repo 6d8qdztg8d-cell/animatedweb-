@@ -9,31 +9,50 @@ import { useRef, useEffect } from "react"
 const DARK_BG  = 0x080808
 const LIGHT_BG = 0xF7F7F3
 
+/** Walk common property paths to find a THREE.WebGLRenderer */
+function findRenderer(app: any): any {
+  if (!app) return null
+  // Direct named paths
+  for (const key of ['renderer', '_renderer', 'webGLRenderer', '_webGLRenderer', 'gl', '_gl']) {
+    if (app[key]?.setClearColor) return app[key]
+  }
+  // One level deep — check every enumerable property
+  try {
+    for (const key of Object.keys(app)) {
+      const val = app[key]
+      if (val && typeof val === 'object' && typeof val.setClearColor === 'function') return val
+    }
+  } catch (_) {}
+  return null
+}
+
+function applyBg(app: any, isDark: boolean) {
+  if (!app) return
+  try {
+    const renderer = findRenderer(app)
+    if (renderer) {
+      renderer.setClearColor(isDark ? DARK_BG : LIGHT_BG, 1)
+      return
+    }
+  } catch (_) {}
+  // Fallback: set canvas CSS background directly (visible on edges / transparent areas)
+  try {
+    const canvas: HTMLElement | null = app.canvas ?? app.getCanvas?.()
+    if (canvas) canvas.style.backgroundColor = isDark ? '#080808' : '#F7F7F3'
+  } catch (_) {}
+}
+
 export function HeroSection({ onContact, theme }: { onContact?: () => void; theme?: 'dark' | 'light' }) {
   const splineRef = useRef<any>(null)
 
-  // Sync Spline renderer clear-color with theme — no CSS delay mismatch
   useEffect(() => {
-    const app = splineRef.current
-    if (!app) return
-    try {
-      const renderer = app.renderer ?? app._renderer
-      if (renderer?.setClearColor) {
-        renderer.setClearColor(theme === 'light' ? LIGHT_BG : DARK_BG, 1)
-      }
-    } catch (_) {}
+    applyBg(splineRef.current, theme !== 'light')
   }, [theme])
 
   function handleSplineLoad(splineApp: any) {
     splineApp.setZoom(0.65)
     splineRef.current = splineApp
-    // Set initial color immediately on load
-    try {
-      const renderer = splineApp.renderer ?? splineApp._renderer
-      if (renderer?.setClearColor) {
-        renderer.setClearColor(theme === 'light' ? LIGHT_BG : DARK_BG, 1)
-      }
-    } catch (_) {}
+    applyBg(splineApp, theme !== 'light')
   }
 
   return (
