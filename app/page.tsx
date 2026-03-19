@@ -215,12 +215,14 @@ const TEAM = [
     role: "Design & Development",
     photo: "/projects/porträit.jpg",
     initials: "AR",
+    bio: "Spezialist für moderne Web-Erlebnisse mit Fokus auf 3D-Interaktion, Performance und konvertierendes Design.",
   },
   {
     name: "Mark Mirakaj",
     role: "Design & Development",
     photo: null,
     initials: "MM",
+    bio: "Kreativer Kopf hinter visuellen Konzepten und Markenerlebnissen — von der ersten Idee bis zum fertigen Pixel.",
   },
 ]
 
@@ -239,10 +241,13 @@ function AboutSection({ onContact }: { onContact: () => void }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
-                className="flex flex-col bg-[var(--c-bg-card)] border border-[var(--c-border-2)] rounded-xl overflow-hidden"
+                className="flex flex-col bg-[var(--c-bg-card)] border border-[var(--c-border-2)] rounded-xl p-4 md:p-6 gap-4"
               >
-                {/* Full-width image */}
-                <div className="w-full aspect-[3/4] overflow-hidden">
+                {/* Circle photo */}
+                <div
+                  className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden shrink-0 mx-auto"
+                  style={{ boxShadow: "0 0 0 3px var(--c-border-2)" }}
+                >
                   {person.photo ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -253,7 +258,7 @@ function AboutSection({ onContact }: { onContact: () => void }) {
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-[var(--c-bg-3)]">
                       <span
-                        className="font-bold text-4xl text-[var(--c-accent-text)]"
+                        className="font-bold text-xl text-[var(--c-accent-text)]"
                         style={{ fontFamily: "var(--font-syne)" }}
                       >
                         {person.initials}
@@ -263,7 +268,7 @@ function AboutSection({ onContact }: { onContact: () => void }) {
                 </div>
 
                 {/* Name + role */}
-                <div className="px-3 py-3 md:px-4 md:py-4 border-t border-[var(--c-border-2)]">
+                <div className="text-center">
                   <div
                     className="text-[var(--c-text)] font-bold text-sm md:text-base leading-tight"
                     style={{ fontFamily: "var(--font-syne)" }}
@@ -271,12 +276,23 @@ function AboutSection({ onContact }: { onContact: () => void }) {
                     {person.name}
                   </div>
                   <div
-                    className="text-[var(--c-text-3)] text-[10px] md:text-xs tracking-wider uppercase mt-0.5"
+                    className="text-[var(--c-accent-text)] text-[10px] md:text-xs tracking-wider uppercase mt-1"
                     style={{ fontFamily: "var(--font-outfit)" }}
                   >
                     {person.role}
                   </div>
                 </div>
+
+                {/* Divider */}
+                <div className="w-8 h-px bg-[var(--c-border-3)] mx-auto" />
+
+                {/* Bio */}
+                <p
+                  className="text-[var(--c-text-3)] text-xs md:text-sm leading-relaxed text-center"
+                  style={{ fontFamily: "var(--font-outfit)" }}
+                >
+                  {person.bio}
+                </p>
               </motion.div>
             ))}
           </div>
