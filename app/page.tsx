@@ -347,12 +347,8 @@ function ProjectsSection() {
                   </div>
                 </div>
                 <div className="w-full aspect-[16/10] overflow-hidden relative">
-                  {"image" in project ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={project.image} alt={project.name} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" />
-                  ) : (
-                    <project.Mockup />
-                  )}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={project.image} alt={project.name} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <span className="flex items-center gap-2 text-white text-sm font-bold tracking-widest uppercase" style={{ fontFamily: "var(--font-syne)" }}>
                       Vorschau <ArrowUpRight size={16} />
@@ -400,12 +396,8 @@ function ProjectsSection() {
               </div>
               {/* Content */}
               <div className="flex-1 overflow-hidden">
-                {"image" in lightbox ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={lightbox.image} alt={lightbox.name} className="w-full h-full object-cover object-top" />
-                ) : (
-                  <lightbox.Mockup />
-                )}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={lightbox.image} alt={lightbox.name} className="w-full h-full object-cover object-top" />
               </div>
               {/* Footer bar */}
               <div className="px-5 py-3 bg-[#0A0A0A] border-t border-[#1a1a1a] flex items-center justify-between shrink-0">
