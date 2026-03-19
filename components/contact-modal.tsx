@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from "framer-motion"
-import { X, Send, CheckCircle } from "lucide-react"
+import { X, Send, CheckCircle, Phone } from "lucide-react"
 import { useState } from "react"
 
 interface ContactModalProps {
@@ -70,6 +70,30 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
                 >
                   <X size={20} />
                 </button>
+              </div>
+
+              {/* Direct call */}
+              <a
+                href="tel:+41766118150"
+                className="flex items-center gap-4 border border-[#1f1f1f] px-4 py-3.5 hover:border-[#CAFF00] transition-colors mb-6 group"
+              >
+                <div className="w-9 h-9 rounded-full bg-[#CAFF00]/10 flex items-center justify-center shrink-0 group-hover:bg-[#CAFF00]/20 transition-colors">
+                  <Phone size={15} className="text-[#CAFF00]" />
+                </div>
+                <div>
+                  <div className="text-[#555] text-[10px] tracking-widest uppercase mb-0.5" style={{ fontFamily: "var(--font-outfit)" }}>
+                    Direkt anrufen
+                  </div>
+                  <div className="text-[#F0EDE8] text-sm font-bold tracking-wide" style={{ fontFamily: "var(--font-syne)" }}>
+                    +41 76 611 81 50
+                  </div>
+                </div>
+              </a>
+
+              <div className="flex items-center gap-3 mb-6">
+                <div className="flex-1 h-px bg-[#1a1a1a]" />
+                <span className="text-[#333] text-xs tracking-widest uppercase" style={{ fontFamily: "var(--font-outfit)" }}>oder</span>
+                <div className="flex-1 h-px bg-[#1a1a1a]" />
               </div>
 
               {status === "done" ? (
