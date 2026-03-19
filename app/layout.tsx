@@ -33,7 +33,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="de" suppressHydrationWarning className={cn(syne.variable, outfit.variable)}>
-      <body className="antialiased bg-[#080808] text-[#F0EDE8]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('df-theme');if(t==='light')document.documentElement.classList.add('light')}catch(e){}` }} />
+      </head>
+      <body className="antialiased" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
         {children}
       </body>
     </html>

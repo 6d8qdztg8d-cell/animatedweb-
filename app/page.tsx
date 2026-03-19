@@ -1,11 +1,11 @@
 'use client'
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { HeroSection } from "@/components/hero-section"
 import { LumiereMockup, VertexMockup, TerraMockup } from "@/components/project-mockups"
 import { ContactModal } from "@/components/contact-modal"
 import { motion, AnimatePresence } from "framer-motion"
-import { ArrowRight, ArrowUpRight, X } from "lucide-react"
+import { ArrowRight, ArrowUpRight, X, Sun, Moon } from "lucide-react"
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -21,7 +21,6 @@ const NAV_LINKS = [
   { label: "Kontakt", href: "contact" },
 ]
 
-
 const PROJECTS = [
   { name: "Lumière Boutique", category: "Elegant · E-Commerce", year: "2024", accent: "#B8860B", Mockup: LumiereMockup, image: "/projects/lumiere.jpg" },
   { name: "Vertex Technologies", category: "Modern · SaaS", year: "2024", accent: "#2563EB", Mockup: VertexMockup, image: "/projects/vertex.jpg" },
@@ -36,7 +35,11 @@ function scrollTo(id: string) {
 
 // ─── Sections ─────────────────────────────────────────────────────────────────
 
-function Navbar({ onContact }: { onContact: () => void }) {
+function Navbar({ onContact, theme, onThemeToggle }: {
+  onContact: () => void
+  theme: 'dark' | 'light'
+  onThemeToggle: () => void
+}) {
   const [menuOpen, setMenuOpen] = useState(false)
 
   function handleNav(href: string, label: string) {
@@ -47,11 +50,14 @@ function Navbar({ onContact }: { onContact: () => void }) {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 border-b border-[#111]" style={{ backgroundColor: "rgba(8,8,8,0.92)", backdropFilter: "blur(16px)" }}>
+      <header
+        className="fixed top-0 left-0 right-0 z-50 border-b border-[var(--c-border)]"
+        style={{ backgroundColor: "var(--c-nav)", backdropFilter: "blur(16px)" }}
+      >
         <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-10 h-14 md:h-16 flex items-center justify-between">
           <button
             onClick={() => scrollTo("hero")}
-            className="text-[#F0EDE8] font-bold text-base md:text-lg tracking-tight"
+            className="text-[var(--c-text)] font-bold text-base md:text-lg tracking-tight"
             style={{ fontFamily: "var(--font-syne)" }}
           >
             DigitalFrame
@@ -63,7 +69,7 @@ function Navbar({ onContact }: { onContact: () => void }) {
               <button
                 key={item.label}
                 onClick={() => handleNav(item.href, item.label)}
-                className="text-[#aaa] hover:text-[#F0EDE8] transition-colors text-sm tracking-wide"
+                className="text-[var(--c-text-2)] hover:text-[var(--c-text)] transition-colors text-sm tracking-wide"
                 style={{ fontFamily: "var(--font-outfit)" }}
               >
                 {item.label}
@@ -71,10 +77,19 @@ function Navbar({ onContact }: { onContact: () => void }) {
             ))}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 md:gap-3">
+            {/* Theme toggle */}
+            <button
+              onClick={onThemeToggle}
+              className="w-8 h-8 flex items-center justify-center text-[var(--c-text-2)] hover:text-[var(--c-text)] transition-colors"
+              aria-label="Theme wechseln"
+            >
+              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+
             <button
               onClick={onContact}
-              className="hidden md:block bg-[#CAFF00] text-[#080808] font-bold text-xs px-5 py-2.5 tracking-widest uppercase hover:bg-white transition-colors"
+              className="hidden md:block bg-[var(--c-accent)] text-[var(--c-accent-bg)] font-bold text-xs px-5 py-2.5 tracking-widest uppercase hover:opacity-90 transition-opacity"
               style={{ fontFamily: "var(--font-syne)" }}
             >
               Anfrage
@@ -85,9 +100,9 @@ function Navbar({ onContact }: { onContact: () => void }) {
               className="md:hidden flex flex-col gap-1.5 p-2 touch-manipulation"
               aria-label="Menu"
             >
-              <span className={`block w-5 h-0.5 bg-[#F0EDE8] transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-              <span className={`block w-5 h-0.5 bg-[#F0EDE8] transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-              <span className={`block w-5 h-0.5 bg-[#F0EDE8] transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+              <span className={`block w-5 h-0.5 bg-[var(--c-text)] transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+              <span className={`block w-5 h-0.5 bg-[var(--c-text)] transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
+              <span className={`block w-5 h-0.5 bg-[var(--c-text)] transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
             </button>
           </div>
         </div>
@@ -101,15 +116,15 @@ function Navbar({ onContact }: { onContact: () => void }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-14 left-0 right-0 z-40 border-b border-[#1a1a1a] md:hidden"
-            style={{ backgroundColor: "rgba(8,8,8,0.98)", backdropFilter: "blur(16px)" }}
+            className="fixed top-14 left-0 right-0 z-40 border-b border-[var(--c-border-2)] md:hidden"
+            style={{ backgroundColor: "var(--c-nav)", backdropFilter: "blur(16px)" }}
           >
             <div className="flex flex-col px-5 py-4 gap-1">
               {NAV_LINKS.map((item) => (
                 <button
                   key={item.label}
                   onClick={() => handleNav(item.href, item.label)}
-                  className="text-left text-[#aaa] active:text-[#CAFF00] text-base py-3.5 border-b border-[#111] last:border-0 touch-manipulation"
+                  className="text-left text-[var(--c-text-2)] active:text-[var(--c-accent-text)] text-base py-3.5 border-b border-[var(--c-border)] last:border-0 touch-manipulation"
                   style={{ fontFamily: "var(--font-outfit)" }}
                 >
                   {item.label}
@@ -117,7 +132,7 @@ function Navbar({ onContact }: { onContact: () => void }) {
               ))}
               <button
                 onClick={() => { setMenuOpen(false); onContact() }}
-                className="mt-3 bg-[#CAFF00] text-[#080808] font-bold text-sm py-4 tracking-widest uppercase touch-manipulation"
+                className="mt-3 bg-[var(--c-accent)] text-[var(--c-accent-bg)] font-bold text-sm py-4 tracking-widest uppercase touch-manipulation"
                 style={{ fontFamily: "var(--font-syne)" }}
               >
                 Anfrage stellen
@@ -133,11 +148,11 @@ function Navbar({ onContact }: { onContact: () => void }) {
 function Marquee() {
   const items = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS]
   return (
-    <div className="border-y border-[#111] bg-[#0C0C0C] py-3 overflow-hidden">
+    <div className="border-y border-[var(--c-border)] bg-[var(--c-bg-3)] py-3 overflow-hidden">
       <div className="flex gap-12 marquee-track whitespace-nowrap">
         {items.map((item, i) => (
-          <span key={i} className="inline-flex items-center gap-4 text-sm text-[#999] tracking-[0.2em] uppercase shrink-0" style={{ fontFamily: "var(--font-outfit)" }}>
-            <span className="w-1.5 h-1.5 rounded-full bg-[#CAFF00] shrink-0" />
+          <span key={i} className="inline-flex items-center gap-4 text-sm text-[var(--c-text-3)] tracking-[0.2em] uppercase shrink-0" style={{ fontFamily: "var(--font-outfit)" }}>
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--c-accent)] shrink-0" />
             {item}
           </span>
         ))}
@@ -157,35 +172,35 @@ function LeistungenSection() {
   ]
 
   return (
-    <section id="leistungen" className="py-6 md:py-10 md:py-32 bg-[#060606] border-t border-[#111]">
+    <section id="leistungen" className="py-6 md:py-32 bg-[var(--c-bg-2)] border-t border-[var(--c-border)]">
       <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-10">
         <div className="mb-7 md:mb-16">
-          <span className="text-[#CAFF00] text-xs tracking-[0.3em] uppercase inline-flex items-center gap-3" style={{ fontFamily: "var(--font-outfit)" }}>
-            <span className="w-8 h-px bg-[#CAFF00]" />Leistungen
+          <span className="text-[var(--c-accent-text)] text-xs tracking-[0.3em] uppercase inline-flex items-center gap-3" style={{ fontFamily: "var(--font-outfit)" }}>
+            <span className="w-8 h-px bg-[var(--c-accent)]" />Leistungen
           </span>
-          <h2 className="mt-4 text-[#F0EDE8] font-bold leading-tight" style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(2rem, 4vw, 3.5rem)" }}>
-            Was wir<br /><span className="text-[#CAFF00]">liefern.</span>
+          <h2 className="mt-4 text-[var(--c-text)] font-bold leading-tight" style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(2rem, 4vw, 3.5rem)" }}>
+            Was wir<br /><span className="text-[var(--c-accent-text)]">liefern.</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-px bg-[#111]">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--c-border)]">
           {items.map((item) => (
             <motion.div
               key={item.num}
-              className="group bg-[#060606] p-5 md:p-8 flex flex-col gap-2 md:gap-4 hover:bg-[#0C0C0C] active:bg-[#0C0C0C] transition-colors cursor-default touch-manipulation"
+              className="group bg-[var(--c-bg-2)] p-5 md:p-8 flex flex-col gap-2 md:gap-4 hover:bg-[var(--c-bg-3)] active:bg-[var(--c-bg-3)] transition-colors cursor-default touch-manipulation"
               whileHover={{ y: -2 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
-              <span className="text-[#1f1f1f] font-bold text-4xl md:text-5xl select-none group-hover:text-[#2a2a2a] transition-colors" style={{ fontFamily: "var(--font-syne)" }}>
+              <span className="text-[var(--c-num)] font-bold text-4xl md:text-5xl select-none group-hover:text-[var(--c-num-hover)] transition-colors" style={{ fontFamily: "var(--font-syne)" }}>
                 {item.num}
               </span>
-              <h3 className="text-[#F0EDE8] font-bold text-lg" style={{ fontFamily: "var(--font-syne)" }}>
+              <h3 className="text-[var(--c-text)] font-bold text-lg" style={{ fontFamily: "var(--font-syne)" }}>
                 {item.title}
               </h3>
-              <p className="text-[#999] text-sm leading-relaxed" style={{ fontFamily: "var(--font-outfit)" }}>
+              <p className="text-[var(--c-text-3)] text-sm leading-relaxed" style={{ fontFamily: "var(--font-outfit)" }}>
                 {item.desc}
               </p>
-              <div className="mt-auto w-8 h-px bg-[#1f1f1f] group-hover:bg-[#CAFF00] group-hover:w-12 transition-all duration-300" />
+              <div className="mt-auto w-8 h-px bg-[var(--c-num)] group-hover:bg-[var(--c-accent)] group-hover:w-12 transition-all duration-300" />
             </motion.div>
           ))}
         </div>
@@ -196,7 +211,7 @@ function LeistungenSection() {
 
 function AboutSection({ onContact }: { onContact: () => void }) {
   return (
-    <section id="about" className="py-12 md:py-32 bg-[#080808] border-t border-[#111]">
+    <section id="about" className="py-12 md:py-32 bg-[var(--c-bg)] border-t border-[var(--c-border)]">
       <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-10 lg:gap-20 xl:gap-28 items-center">
 
@@ -211,7 +226,7 @@ function AboutSection({ onContact }: { onContact: () => void }) {
             <div className="flex justify-center lg:justify-start">
               <div
                 className="w-[180px] h-[180px] md:w-[210px] md:h-[210px] rounded-full overflow-hidden bg-white shrink-0"
-                style={{ boxShadow: "0 0 0 4px #ffffff, 0 0 0 6px #1a1a1a" }}
+                style={{ boxShadow: "0 0 0 4px #ffffff, 0 0 0 6px var(--c-border-2)" }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -230,8 +245,8 @@ function AboutSection({ onContact }: { onContact: () => void }) {
                 { num: "3×", label: "Conversions" },
               ].map((s) => (
                 <div key={s.label}>
-                  <div className="font-bold text-xl text-[#F0EDE8]" style={{ fontFamily: "var(--font-syne)" }}>{s.num}</div>
-                  <div className="text-xs text-[#555] tracking-widest uppercase mt-0.5" style={{ fontFamily: "var(--font-outfit)" }}>{s.label}</div>
+                  <div className="font-bold text-xl text-[var(--c-text)]" style={{ fontFamily: "var(--font-syne)" }}>{s.num}</div>
+                  <div className="text-xs text-[var(--c-text-3)] tracking-widest uppercase mt-0.5" style={{ fontFamily: "var(--font-outfit)" }}>{s.label}</div>
                 </div>
               ))}
             </div>
@@ -243,16 +258,15 @@ function AboutSection({ onContact }: { onContact: () => void }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-            className=""
           >
-            <span className="text-[#CAFF00] text-xs tracking-[0.3em] uppercase inline-flex items-center gap-3 mb-4" style={{ fontFamily: "var(--font-outfit)" }}>
-              <span className="w-8 h-px bg-[#CAFF00]" />Über mich
+            <span className="text-[var(--c-accent-text)] text-xs tracking-[0.3em] uppercase inline-flex items-center gap-3 mb-4" style={{ fontFamily: "var(--font-outfit)" }}>
+              <span className="w-8 h-px bg-[var(--c-accent)]" />Über mich
             </span>
-            <h2 className="text-[#F0EDE8] font-bold leading-tight mb-6" style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
-              Ich baue Websites,<br />die <span className="text-[#CAFF00]">verkaufen.</span>
+            <h2 className="text-[var(--c-text)] font-bold leading-tight mb-6" style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
+              Ich baue Websites,<br />die <span className="text-[var(--c-accent-text)]">verkaufen.</span>
             </h2>
 
-            <div className="flex flex-col gap-4 text-[#777] text-sm md:text-[0.95rem] leading-relaxed" style={{ fontFamily: "var(--font-outfit)" }}>
+            <div className="flex flex-col gap-4 text-[var(--c-text-3)] text-sm md:text-[0.95rem] leading-relaxed" style={{ fontFamily: "var(--font-outfit)" }}>
               <p>
                 Hallo, ich bin der Gründer von DigitalFrame. Mit Leidenschaft für modernes Web-Design und Technologie helfe ich Unternehmen, ihre digitale Präsenz auf das nächste Level zu bringen.
               </p>
@@ -266,7 +280,7 @@ function AboutSection({ onContact }: { onContact: () => void }) {
               {["Next.js", "React", "3D Design", "UI/UX", "Branding", "SEO"].map((tag) => (
                 <span
                   key={tag}
-                  className="text-xs px-3 py-1.5 border border-[#1e1e1e] text-[#555] hover:border-[#CAFF00]/30 hover:text-[#CAFF00] transition-colors"
+                  className="text-xs px-3 py-1.5 border border-[var(--c-border-3)] text-[var(--c-text-3)] hover:border-[var(--c-accent)] hover:text-[var(--c-accent-text)] transition-colors"
                   style={{ fontFamily: "var(--font-outfit)" }}
                 >
                   {tag}
@@ -276,7 +290,7 @@ function AboutSection({ onContact }: { onContact: () => void }) {
 
             <button
               onClick={onContact}
-              className="mt-8 group flex items-center gap-3 bg-[#CAFF00] text-[#080808] font-bold px-6 py-3.5 text-sm tracking-widest uppercase hover:bg-white active:scale-95 transition-all touch-manipulation"
+              className="mt-8 group flex items-center gap-3 bg-[var(--c-accent)] text-[var(--c-accent-bg)] font-bold px-6 py-3.5 text-sm tracking-widest uppercase hover:opacity-90 active:scale-95 transition-all touch-manipulation"
               style={{ fontFamily: "var(--font-syne)" }}
             >
               Zusammenarbeiten
@@ -294,18 +308,18 @@ function ProjectsSection() {
   const [lightbox, setLightbox] = useState<typeof PROJECTS[number] | null>(null)
 
   return (
-    <section id="projects" className="py-6 md:py-10 md:py-32 bg-[#060606]">
+    <section id="projects" className="py-6 md:py-32 bg-[var(--c-bg-2)]">
       <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-10">
         <div className="mb-7 md:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
-            <span className="text-[#CAFF00] text-xs tracking-[0.3em] uppercase inline-flex items-center gap-3" style={{ fontFamily: "var(--font-outfit)" }}>
-              <span className="w-8 h-px bg-[#CAFF00]" />Ausgewählte Arbeiten
+            <span className="text-[var(--c-accent-text)] text-xs tracking-[0.3em] uppercase inline-flex items-center gap-3" style={{ fontFamily: "var(--font-outfit)" }}>
+              <span className="w-8 h-px bg-[var(--c-accent)]" />Ausgewählte Arbeiten
             </span>
-            <h2 className="mt-4 text-[#F0EDE8] font-bold leading-tight" style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(2rem, 4vw, 3.5rem)" }}>
-              Projekte, die<br /><span className="text-[#CAFF00]">konvertieren.</span>
+            <h2 className="mt-4 text-[var(--c-text)] font-bold leading-tight" style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(2rem, 4vw, 3.5rem)" }}>
+              Projekte, die<br /><span className="text-[var(--c-accent-text)]">konvertieren.</span>
             </h2>
           </div>
-          <p className="text-[#aaa] max-w-sm leading-relaxed text-sm" style={{ fontFamily: "var(--font-outfit)" }}>
+          <p className="text-[var(--c-text-2)] max-w-sm leading-relaxed text-sm" style={{ fontFamily: "var(--font-outfit)" }}>
             Klick auf ein Projekt für eine große Vorschau.
           </p>
         </div>
@@ -320,12 +334,12 @@ function ProjectsSection() {
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
               onClick={() => setLightbox(project)}
             >
-              <div className="rounded-lg overflow-hidden border border-[#1a1a1a] bg-[#0E0E0E] shadow-2xl">
-                <div className="flex items-center gap-2 px-4 py-3 bg-[#141414] border-b border-[#1a1a1a]">
+              <div className="rounded-lg overflow-hidden border border-[var(--c-border-2)] bg-[var(--c-bg-card)] shadow-2xl">
+                <div className="flex items-center gap-2 px-4 py-3 bg-[var(--c-bg-card-2)] border-b border-[var(--c-border-2)]">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
                   <span className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
                   <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
-                  <div className="ml-3 flex-1 bg-[#1a1a1a] rounded text-[#999] text-xs px-3 py-1 truncate" style={{ fontFamily: "var(--font-outfit)" }}>
+                  <div className="ml-3 flex-1 bg-[var(--c-border-2)] rounded text-[var(--c-text-3)] text-xs px-3 py-1 truncate" style={{ fontFamily: "var(--font-outfit)" }}>
                     {project.name.toLowerCase().replace(" ", "-")}.com
                   </div>
                 </div>
@@ -341,8 +355,8 @@ function ProjectsSection() {
               </div>
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="text-[#F0EDE8] font-bold text-lg" style={{ fontFamily: "var(--font-syne)" }}>{project.name}</h3>
-                  <span className="text-[#999] text-xs tracking-widest uppercase mt-1 block" style={{ fontFamily: "var(--font-outfit)" }}>{project.category} · {project.year}</span>
+                  <h3 className="text-[var(--c-text)] font-bold text-lg" style={{ fontFamily: "var(--font-syne)" }}>{project.name}</h3>
+                  <span className="text-[var(--c-text-3)] text-xs tracking-widest uppercase mt-1 block" style={{ fontFamily: "var(--font-outfit)" }}>{project.category} · {project.year}</span>
                 </div>
                 <span className="shrink-0 mt-1 text-xs px-3 py-1 rounded-full border" style={{ borderColor: project.accent, color: project.accent, fontFamily: "var(--font-outfit)" }}>
                   {String(i + 1).padStart(2, "0")}
@@ -357,23 +371,23 @@ function ProjectsSection() {
       <AnimatePresence>
         {lightbox && (
           <>
-            <motion.div className="fixed inset-0 bg-black/90 z-50 backdrop-blur-sm" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setLightbox(null)} />
+            <motion.div className="fixed inset-0 bg-black/80 z-50 backdrop-blur-sm" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setLightbox(null)} />
             <motion.div
-              className="fixed inset-4 md:inset-12 z-50 rounded-xl overflow-hidden border border-[#222] shadow-2xl flex flex-col bg-[#0E0E0E]"
+              className="fixed inset-4 md:inset-12 z-50 rounded-xl overflow-hidden border border-[var(--c-border-2)] shadow-2xl flex flex-col bg-[var(--c-bg-card)]"
               initial={{ opacity: 0, scale: 0.92 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.92 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
             >
               {/* Browser bar */}
-              <div className="flex items-center gap-2 px-5 py-3.5 bg-[#141414] border-b border-[#1a1a1a] shrink-0">
+              <div className="flex items-center gap-2 px-5 py-3.5 bg-[var(--c-bg-card-2)] border-b border-[var(--c-border-2)] shrink-0">
                 <button onClick={() => setLightbox(null)} className="w-3 h-3 rounded-full bg-[#FF5F57] hover:opacity-80 transition-opacity" />
                 <span className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
                 <span className="w-3 h-3 rounded-full bg-[#28C840]" />
-                <div className="ml-4 flex-1 bg-[#1a1a1a] rounded text-[#aaa] text-xs px-4 py-1.5 text-center truncate" style={{ fontFamily: "var(--font-outfit)" }}>
+                <div className="ml-4 flex-1 bg-[var(--c-border-2)] rounded text-[var(--c-text-2)] text-xs px-4 py-1.5 text-center truncate" style={{ fontFamily: "var(--font-outfit)" }}>
                   {lightbox.name.toLowerCase().replace(" ", "-")}.com
                 </div>
-                <button onClick={() => setLightbox(null)} className="ml-4 text-[#aaa] hover:text-[#F0EDE8] transition-colors">
+                <button onClick={() => setLightbox(null)} className="ml-4 text-[var(--c-text-2)] hover:text-[var(--c-text)] transition-colors">
                   <X size={16} />
                 </button>
               </div>
@@ -383,10 +397,10 @@ function ProjectsSection() {
                 <img src={lightbox.image} alt={lightbox.name} className="w-full h-full object-cover object-top" />
               </div>
               {/* Footer bar */}
-              <div className="px-5 py-3 bg-[#0A0A0A] border-t border-[#1a1a1a] flex items-center justify-between shrink-0">
+              <div className="px-5 py-3 bg-[var(--c-bg)] border-t border-[var(--c-border-2)] flex items-center justify-between shrink-0">
                 <div>
-                  <span className="text-[#F0EDE8] font-bold text-sm" style={{ fontFamily: "var(--font-syne)" }}>{lightbox.name}</span>
-                  <span className="text-[#999] text-xs ml-3" style={{ fontFamily: "var(--font-outfit)" }}>{lightbox.category}</span>
+                  <span className="text-[var(--c-text)] font-bold text-sm" style={{ fontFamily: "var(--font-syne)" }}>{lightbox.name}</span>
+                  <span className="text-[var(--c-text-3)] text-xs ml-3" style={{ fontFamily: "var(--font-outfit)" }}>{lightbox.category}</span>
                 </div>
                 <span className="text-xs px-3 py-1 rounded-full border" style={{ borderColor: lightbox.accent, color: lightbox.accent, fontFamily: "var(--font-outfit)" }}>Live</span>
               </div>
@@ -400,15 +414,15 @@ function ProjectsSection() {
 
 function CtaSection({ onContact }: { onContact: () => void }) {
   return (
-    <section id="contact" className="py-6 md:py-10 md:py-32 bg-[#080808] border-t border-[#111]">
+    <section id="contact" className="py-6 md:py-32 bg-[var(--c-bg)] border-t border-[var(--c-border)]">
       <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-10 text-center">
-        <span className="text-[#CAFF00] text-xs tracking-[0.3em] uppercase inline-flex items-center justify-center gap-3 mb-6" style={{ fontFamily: "var(--font-outfit)" }}>
-          <span className="w-8 h-px bg-[#CAFF00]" />Bereit loszulegen?<span className="w-8 h-px bg-[#CAFF00]" />
+        <span className="text-[var(--c-accent-text)] text-xs tracking-[0.3em] uppercase inline-flex items-center justify-center gap-3 mb-6" style={{ fontFamily: "var(--font-outfit)" }}>
+          <span className="w-8 h-px bg-[var(--c-accent)]" />Bereit loszulegen?<span className="w-8 h-px bg-[var(--c-accent)]" />
         </span>
-        <h2 className="text-[#F0EDE8] font-bold leading-tight mx-auto" style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(2.5rem, 6vw, 5.5rem)", maxWidth: "14ch" }}>
-          Ihr nächstes Projekt.{" "}<span className="text-[#CAFF00]">Außergewöhnlich.</span>
+        <h2 className="text-[var(--c-text)] font-bold leading-tight mx-auto" style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(2.5rem, 6vw, 5.5rem)", maxWidth: "14ch" }}>
+          Ihr nächstes Projekt.{" "}<span className="text-[var(--c-accent-text)]">Außergewöhnlich.</span>
         </h2>
-        <p className="mt-8 text-[#aaa] text-lg max-w-lg mx-auto leading-relaxed" style={{ fontFamily: "var(--font-outfit)" }}>
+        <p className="mt-8 text-[var(--c-text-2)] text-lg max-w-lg mx-auto leading-relaxed" style={{ fontFamily: "var(--font-outfit)" }}>
           Erzählen Sie uns von Ihrer Idee. Wir machen daraus eine Website, die Besucher in Kunden verwandelt.
         </p>
         <div className="mt-12 flex flex-wrap justify-center gap-4">
@@ -416,7 +430,7 @@ function CtaSection({ onContact }: { onContact: () => void }) {
             onClick={onContact}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="group flex items-center gap-3 bg-[#CAFF00] text-[#080808] font-bold px-8 md:px-10 py-4 md:py-5 text-sm tracking-widest uppercase w-full sm:w-auto justify-center touch-manipulation active:scale-95"
+            className="group flex items-center gap-3 bg-[var(--c-accent)] text-[var(--c-accent-bg)] font-bold px-8 md:px-10 py-4 md:py-5 text-sm tracking-widest uppercase w-full sm:w-auto justify-center touch-manipulation active:scale-95 hover:opacity-90 transition-opacity"
             style={{ fontFamily: "var(--font-syne)" }}
           >
             Kostenloses Gespräch
@@ -430,12 +444,12 @@ function CtaSection({ onContact }: { onContact: () => void }) {
 
 function Footer({ onContact }: { onContact: () => void }) {
   return (
-    <footer className="border-t border-[#111] bg-[#060606] py-6 md:py-10">
+    <footer className="border-t border-[var(--c-border)] bg-[var(--c-bg-2)] py-6 md:py-10">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col md:flex-row items-center justify-between gap-4">
-        <span className="text-[#F0EDE8] font-bold text-base" style={{ fontFamily: "var(--font-syne)" }}>
+        <span className="text-[var(--c-text)] font-bold text-base" style={{ fontFamily: "var(--font-syne)" }}>
           DigitalFrame
         </span>
-        <button onClick={onContact} className="text-[#333] hover:text-[#CAFF00] text-xs tracking-wide transition-colors" style={{ fontFamily: "var(--font-outfit)" }}>
+        <button onClick={onContact} className="text-[var(--c-text-4)] hover:text-[var(--c-accent-text)] text-xs tracking-wide transition-colors" style={{ fontFamily: "var(--font-outfit)" }}>
           © 2025 DigitalFrame · Kontakt aufnehmen →
         </button>
       </div>
@@ -447,11 +461,28 @@ function Footer({ onContact }: { onContact: () => void }) {
 
 export default function Page() {
   const [modalOpen, setModalOpen] = useState(false)
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
+
+  useEffect(() => {
+    const saved = localStorage.getItem('df-theme') as 'dark' | 'light' | null
+    if (saved) setTheme(saved)
+  }, [])
+
+  useEffect(() => {
+    if (theme === 'light') {
+      document.documentElement.classList.add('light')
+    } else {
+      document.documentElement.classList.remove('light')
+    }
+    localStorage.setItem('df-theme', theme)
+  }, [theme])
+
+  const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark')
 
   return (
     <>
       <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} />
-      <Navbar onContact={() => setModalOpen(true)} />
+      <Navbar onContact={() => setModalOpen(true)} theme={theme} onThemeToggle={toggleTheme} />
       <div id="hero"><HeroSection onContact={() => setModalOpen(true)} /></div>
       <Marquee />
       <LeistungenSection />

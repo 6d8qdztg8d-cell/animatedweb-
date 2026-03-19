@@ -127,6 +127,57 @@
     }
 }
 
+/* ── DigitalFrame Color System ───────────────────────────── */
+/* Dark mode (default) */
+:root {
+  --c-bg:          #080808;
+  --c-bg-2:        #060606;
+  --c-bg-3:        #0C0C0C;
+  --c-bg-card:     #0E0E0E;
+  --c-bg-card-2:   #141414;
+  --c-text:        #F0EDE8;
+  --c-text-2:      #aaaaaa;
+  --c-text-3:      #888888;
+  --c-text-4:      #777777;
+  --c-border:      #111111;
+  --c-border-2:    #1a1a1a;
+  --c-border-3:    #222222;
+  --c-accent:      #CAFF00;
+  --c-accent-text: #CAFF00;
+  --c-accent-bg:   #080808;
+  --c-nav:         rgba(8, 8, 8, 0.92);
+  --c-num:         #1f1f1f;
+  --c-num-hover:   #2a2a2a;
+}
+
+/* Light mode */
+html.light {
+  --c-bg:          #F7F7F3;
+  --c-bg-2:        #EFEFEB;
+  --c-bg-3:        #E5E5E1;
+  --c-bg-card:     #FFFFFF;
+  --c-bg-card-2:   #F5F5F1;
+  --c-text:        #0F0F0F;
+  --c-text-2:      #555555;
+  --c-text-3:      #666666;
+  --c-text-4:      #888888;
+  --c-border:      #DDDDD9;
+  --c-border-2:    #E0E0DC;
+  --c-border-3:    #E8E8E4;
+  --c-accent:      #CAFF00;
+  --c-accent-text: #2E6B00;
+  --c-accent-bg:   #080808;
+  --c-nav:         rgba(247, 247, 243, 0.92);
+  --c-num:         #D0D0CC;
+  --c-num-hover:   #BBBBBB;
+}
+
+body {
+  background-color: var(--c-bg);
+  color: var(--c-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -155,7 +206,8 @@
   animation: var(--animate-spotlight);
 }
 
-/* Force Spline canvas to match page background */
+/* Spline canvas matches theme background */
 .spline-wrapper canvas {
-  background: #080808 !important;
+  background: var(--c-bg) !important;
+  transition: background-color 0.3s ease;
 }
