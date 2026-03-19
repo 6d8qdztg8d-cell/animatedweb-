@@ -13,15 +13,6 @@ export function HeroSection({ onContact }: { onContact?: () => void }) {
         fill="#CAFF00"
       />
 
-      {/* Subtle grid */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(var(--c-text) 1px, transparent 1px), linear-gradient(90deg, var(--c-text) 1px, transparent 1px)`,
-          backgroundSize: "64px 64px",
-        }}
-      />
-
       {/* Content — flex col on mobile, grid on desktop */}
       <div className="relative z-10 flex-1 w-full max-w-7xl mx-auto px-5 md:px-6 lg:px-10 flex flex-col lg:grid lg:grid-cols-2 lg:gap-4 lg:items-center lg:py-8">
 
