@@ -196,54 +196,63 @@ function LeistungenSection() {
 
 function AboutSection({ onContact }: { onContact: () => void }) {
   return (
-    <section id="about" className="py-10 md:py-32 bg-[#080808] border-t border-[#111]">
+    <section id="about" className="py-12 md:py-32 bg-[#080808] border-t border-[#111]">
       <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-10 lg:gap-20 xl:gap-28 items-end">
 
-          {/* Photo */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="relative flex justify-center lg:justify-start"
-          >
-            {/* Accent background shape */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-8 lg:translate-x-0 w-[240px] md:w-[300px] lg:w-[340px] h-[300px] md:h-[380px] lg:h-[440px] bg-[#CAFF00]/10 rounded-2xl" />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/projects/portrait-nobg.png"
-              alt="DigitalFrame – Gründer"
-              className="relative z-10 w-[220px] md:w-[280px] lg:w-[340px] object-contain drop-shadow-2xl"
-            />
-            {/* Floating badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-              className="absolute bottom-6 right-4 md:right-8 lg:-right-4 z-20 bg-[#0E0E0E] border border-[#1a1a1a] rounded-xl px-4 py-3 shadow-xl"
-            >
-              <div className="text-[#CAFF00] font-bold text-lg" style={{ fontFamily: "var(--font-syne)" }}>50+</div>
-              <div className="text-[#999] text-xs tracking-widest uppercase" style={{ fontFamily: "var(--font-outfit)" }}>Projekte</div>
-            </motion.div>
-          </motion.div>
-
-          {/* Text */}
+          {/* Portrait column */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {/* Photo frame – white circle */}
+            <div className="flex justify-center lg:justify-start">
+              <div
+                className="w-[180px] h-[180px] md:w-[210px] md:h-[210px] rounded-full overflow-hidden bg-white shrink-0"
+                style={{ boxShadow: "0 0 0 4px #ffffff, 0 0 0 6px #1a1a1a" }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/projects/porträit.jpg"
+                  alt="Gründer von DigitalFrame"
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+            </div>
+
+            {/* Stats below photo */}
+            <div className="mt-6 flex gap-8 justify-center lg:justify-start">
+              {[
+                { num: "50+", label: "Projekte" },
+                { num: "100%", label: "Zufrieden" },
+                { num: "3×", label: "Conversions" },
+              ].map((s) => (
+                <div key={s.label}>
+                  <div className="font-bold text-xl text-[#F0EDE8]" style={{ fontFamily: "var(--font-syne)" }}>{s.num}</div>
+                  <div className="text-xs text-[#555] tracking-widest uppercase mt-0.5" style={{ fontFamily: "var(--font-outfit)" }}>{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Text column */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+            className="pb-0 lg:pb-6"
           >
             <span className="text-[#CAFF00] text-xs tracking-[0.3em] uppercase inline-flex items-center gap-3 mb-4" style={{ fontFamily: "var(--font-outfit)" }}>
               <span className="w-8 h-px bg-[#CAFF00]" />Über mich
             </span>
-            <h2 className="text-[#F0EDE8] font-bold leading-tight mb-5" style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
+            <h2 className="text-[#F0EDE8] font-bold leading-tight mb-6" style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
               Ich baue Websites,<br />die <span className="text-[#CAFF00]">verkaufen.</span>
             </h2>
 
-            <div className="flex flex-col gap-4 text-[#999] text-sm md:text-base leading-relaxed" style={{ fontFamily: "var(--font-outfit)" }}>
+            <div className="flex flex-col gap-4 text-[#777] text-sm md:text-[0.95rem] leading-relaxed" style={{ fontFamily: "var(--font-outfit)" }}>
               <p>
                 Hallo, ich bin der Gründer von DigitalFrame. Mit Leidenschaft für modernes Web-Design und Technologie helfe ich Unternehmen, ihre digitale Präsenz auf das nächste Level zu bringen.
               </p>
@@ -253,11 +262,11 @@ function AboutSection({ onContact }: { onContact: () => void }) {
             </div>
 
             {/* Tags */}
-            <div className="flex flex-wrap gap-2 mt-6">
+            <div className="flex flex-wrap gap-2 mt-7">
               {["Next.js", "React", "3D Design", "UI/UX", "Branding", "SEO"].map((tag) => (
                 <span
                   key={tag}
-                  className="text-xs px-3 py-1.5 border border-[#1f1f1f] text-[#666] rounded-full"
+                  className="text-xs px-3 py-1.5 border border-[#1e1e1e] text-[#555] hover:border-[#CAFF00]/30 hover:text-[#CAFF00] transition-colors"
                   style={{ fontFamily: "var(--font-outfit)" }}
                 >
                   {tag}
