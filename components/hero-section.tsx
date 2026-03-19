@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react"
 
 export function HeroSection({ onContact }: { onContact?: () => void }) {
   return (
-    <section className="relative min-h-[100dvh] bg-[var(--c-bg)] overflow-hidden flex flex-col pt-14 md:pt-20">
+    <section className="relative min-h-[100dvh] bg-[var(--c-bg)] flex flex-col pt-14 md:pt-20">
       <Spotlight
         className="-top-40 left-0 md:left-40 md:-top-20"
         fill="#CAFF00"
