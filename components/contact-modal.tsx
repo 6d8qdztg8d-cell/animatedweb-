@@ -66,7 +66,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
                 </div>
                 <button
                   onClick={handleClose}
-                  className="text-[#444] hover:text-[#F0EDE8] transition-colors p-1 mt-1"
+                  className="text-[#777] hover:text-[#F0EDE8] transition-colors p-1 mt-1"
                 >
                   <X size={20} />
                 </button>
@@ -81,7 +81,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
                   <Phone size={15} className="text-[#CAFF00]" />
                 </div>
                 <div>
-                  <div className="text-[#555] text-[10px] tracking-widest uppercase mb-0.5" style={{ fontFamily: "var(--font-outfit)" }}>
+                  <div className="text-[#888] text-[10px] tracking-widest uppercase mb-0.5" style={{ fontFamily: "var(--font-outfit)" }}>
                     Direkt anrufen
                   </div>
                   <div className="text-[#F0EDE8] text-sm font-bold tracking-wide" style={{ fontFamily: "var(--font-syne)" }}>
@@ -92,7 +92,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
 
               <div className="flex items-center gap-3 mb-6">
                 <div className="flex-1 h-px bg-[#1a1a1a]" />
-                <span className="text-[#333] text-xs tracking-widest uppercase" style={{ fontFamily: "var(--font-outfit)" }}>oder</span>
+                <span className="text-[#666] text-xs tracking-widest uppercase" style={{ fontFamily: "var(--font-outfit)" }}>oder</span>
                 <div className="flex-1 h-px bg-[#1a1a1a]" />
               </div>
 
@@ -110,7 +110,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
                     Nachricht gesendet!
                   </h3>
                   <p
-                    className="text-[#555] text-sm max-w-xs leading-relaxed"
+                    className="text-[#888] text-sm max-w-xs leading-relaxed"
                     style={{ fontFamily: "var(--font-outfit)" }}
                   >
                     Wir melden uns innerhalb von 24 Stunden bei dir.
@@ -128,7 +128,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
                   {/* Name */}
                   <div className="flex flex-col gap-1.5">
                     <label
-                      className="text-[#444] text-xs tracking-widest uppercase"
+                      className="text-[#999] text-xs tracking-widest uppercase"
                       style={{ fontFamily: "var(--font-outfit)" }}
                     >
                       Name
@@ -138,7 +138,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
                       value={form.name}
                       onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                       placeholder="Max Mustermann"
-                      className="bg-[#141414] border border-[#1f1f1f] text-[#F0EDE8] placeholder-[#333] px-4 py-3 text-sm outline-none focus:border-[#CAFF00] transition-colors rounded-sm"
+                      className="bg-[#141414] border border-[#1f1f1f] text-[#F0EDE8] placeholder-[#555] px-4 py-3 text-sm outline-none focus:border-[#CAFF00] transition-colors rounded-sm"
                       style={{ fontFamily: "var(--font-outfit)" }}
                     />
                   </div>
@@ -146,7 +146,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
                   {/* Email */}
                   <div className="flex flex-col gap-1.5">
                     <label
-                      className="text-[#444] text-xs tracking-widest uppercase"
+                      className="text-[#999] text-xs tracking-widest uppercase"
                       style={{ fontFamily: "var(--font-outfit)" }}
                     >
                       E-Mail
@@ -157,7 +157,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
                       value={form.email}
                       onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                       placeholder="max@firma.de"
-                      className="bg-[#141414] border border-[#1f1f1f] text-[#F0EDE8] placeholder-[#333] px-4 py-3 text-sm outline-none focus:border-[#CAFF00] transition-colors rounded-sm"
+                      className="bg-[#141414] border border-[#1f1f1f] text-[#F0EDE8] placeholder-[#555] px-4 py-3 text-sm outline-none focus:border-[#CAFF00] transition-colors rounded-sm"
                       style={{ fontFamily: "var(--font-outfit)" }}
                     />
                   </div>
@@ -165,7 +165,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
                   {/* Type */}
                   <div className="flex flex-col gap-1.5">
                     <label
-                      className="text-[#444] text-xs tracking-widest uppercase"
+                      className="text-[#999] text-xs tracking-widest uppercase"
                       style={{ fontFamily: "var(--font-outfit)" }}
                     >
                       Design-Stil
@@ -187,7 +187,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
                   {/* Message */}
                   <div className="flex flex-col gap-1.5">
                     <label
-                      className="text-[#444] text-xs tracking-widest uppercase"
+                      className="text-[#999] text-xs tracking-widest uppercase"
                       style={{ fontFamily: "var(--font-outfit)" }}
                     >
                       Nachricht
@@ -198,7 +198,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
                       onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
                       rows={4}
                       placeholder="Erzähl uns von deinem Projekt…"
-                      className="bg-[#141414] border border-[#1f1f1f] text-[#F0EDE8] placeholder-[#333] px-4 py-3 text-sm outline-none focus:border-[#CAFF00] transition-colors rounded-sm resize-none"
+                      className="bg-[#141414] border border-[#1f1f1f] text-[#F0EDE8] placeholder-[#555] px-4 py-3 text-sm outline-none focus:border-[#CAFF00] transition-colors rounded-sm resize-none"
                       style={{ fontFamily: "var(--font-outfit)" }}
                     />
                   </div>
