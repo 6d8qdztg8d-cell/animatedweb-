@@ -209,47 +209,88 @@ function LeistungenSection() {
   )
 }
 
+const TEAM = [
+  {
+    name: "Altin Ramadani",
+    role: "Design & Development",
+    photo: "/projects/porträit.jpg",
+    initials: "AR",
+  },
+  {
+    name: "Mark Mirakaj",
+    role: "Design & Development",
+    photo: null,
+    initials: "MM",
+  },
+]
+
 function AboutSection({ onContact }: { onContact: () => void }) {
   return (
     <section id="about" className="py-12 md:py-32 bg-[var(--c-bg)] border-t border-[var(--c-border)]">
       <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-10 lg:gap-20 xl:gap-28 items-center">
 
-          {/* Portrait column */}
+          {/* Team profiles column — 2 cards side by side */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="grid grid-cols-2 gap-3 md:gap-4"
           >
-            {/* Photo frame – white circle */}
-            <div className="flex justify-center lg:justify-start">
-              <div
-                className="w-[180px] h-[180px] md:w-[210px] md:h-[210px] rounded-full overflow-hidden bg-white shrink-0"
-                style={{ boxShadow: "0 0 0 4px #ffffff, 0 0 0 6px var(--c-border-2)" }}
+            {TEAM.map((person, i) => (
+              <motion.div
+                key={person.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
+                className="flex flex-col items-center text-center bg-[var(--c-bg-card)] border border-[var(--c-border-2)] rounded-xl p-4 md:p-6 gap-3"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/projects/porträit.jpg"
-                  alt="Gründer von DigitalFrame"
-                  className="w-full h-full object-cover object-top"
-                />
-              </div>
-            </div>
-
-            {/* Stats below photo */}
-            <div className="mt-6 flex gap-8 justify-center lg:justify-start">
-              {[
-                { num: "50+", label: "Projekte" },
-                { num: "100%", label: "Zufrieden" },
-                { num: "3×", label: "Conversions" },
-              ].map((s) => (
-                <div key={s.label}>
-                  <div className="font-bold text-xl text-[var(--c-text)]" style={{ fontFamily: "var(--font-syne)" }}>{s.num}</div>
-                  <div className="text-xs text-[var(--c-text-3)] tracking-widest uppercase mt-0.5" style={{ fontFamily: "var(--font-outfit)" }}>{s.label}</div>
+                {/* Photo or initials */}
+                <div
+                  className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden shrink-0 flex items-center justify-center"
+                  style={{ boxShadow: "0 0 0 3px var(--c-border-2)" }}
+                >
+                  {person.photo ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={person.photo}
+                      alt={person.name}
+                      className="w-full h-full object-cover object-top"
+                    />
+                  ) : (
+                    <div
+                      className="w-full h-full flex items-center justify-center bg-[var(--c-bg-3)]"
+                    >
+                      <span
+                        className="font-bold text-lg text-[var(--c-accent-text)]"
+                        style={{ fontFamily: "var(--font-syne)" }}
+                      >
+                        {person.initials}
+                      </span>
+                    </div>
+                  )}
                 </div>
-              ))}
-            </div>
+
+                <div>
+                  <div
+                    className="text-[var(--c-text)] font-bold text-sm md:text-base leading-tight"
+                    style={{ fontFamily: "var(--font-syne)" }}
+                  >
+                    {person.name}
+                  </div>
+                  <div
+                    className="text-[var(--c-text-3)] text-[10px] md:text-xs tracking-wider uppercase mt-1"
+                    style={{ fontFamily: "var(--font-outfit)" }}
+                  >
+                    {person.role}
+                  </div>
+                </div>
+
+                <div className="w-8 h-px bg-[var(--c-accent)] mt-auto" />
+              </motion.div>
+            ))}
           </motion.div>
 
           {/* Text column */}
@@ -260,18 +301,18 @@ function AboutSection({ onContact }: { onContact: () => void }) {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
           >
             <span className="text-[var(--c-accent-text)] text-xs tracking-[0.3em] uppercase inline-flex items-center gap-3 mb-4" style={{ fontFamily: "var(--font-outfit)" }}>
-              <span className="w-8 h-px bg-[var(--c-accent)]" />Über mich
+              <span className="w-8 h-px bg-[var(--c-accent)]" />Über uns
             </span>
             <h2 className="text-[var(--c-text)] font-bold leading-tight mb-6" style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
-              Ich baue Websites,<br />die <span className="text-[var(--c-accent-text)]">verkaufen.</span>
+              Wir bauen Websites,<br />die <span className="text-[var(--c-accent-text)]">verkaufen.</span>
             </h2>
 
             <div className="flex flex-col gap-4 text-[var(--c-text-3)] text-sm md:text-[0.95rem] leading-relaxed" style={{ fontFamily: "var(--font-outfit)" }}>
               <p>
-                Hallo, ich bin der Gründer von DigitalFrame. Mit Leidenschaft für modernes Web-Design und Technologie helfe ich Unternehmen, ihre digitale Präsenz auf das nächste Level zu bringen.
+                Wir sind Altin & Mark — das Team hinter DigitalFrame. Mit Leidenschaft für modernes Web-Design und Technologie helfen wir Unternehmen, ihre digitale Präsenz auf das nächste Level zu bringen.
               </p>
               <p>
-                Von der ersten Idee bis zum fertigen Produkt — ich begleite dich durch den gesamten Prozess und sorge dafür, dass deine Website nicht nur schön aussieht, sondern auch messbare Ergebnisse liefert.
+                Von der ersten Idee bis zum fertigen Produkt — wir begleiten dich durch den gesamten Prozess und sorgen dafür, dass deine Website nicht nur schön aussieht, sondern auch messbare Ergebnisse liefert.
               </p>
             </div>
 
