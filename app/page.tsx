@@ -365,18 +365,18 @@ function AboutSection({ onContact }: { onContact: () => void }) {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
           >
-            <span className="text-[var(--c-accent-text)] text-xs tracking-[0.3em] uppercase inline-flex items-center gap-3 mb-4" style={{ fontFamily: "var(--font-outfit)" }}>
+            <span className="text-[var(--c-accent-text)] text-xs tracking-[0.3em] uppercase inline-flex items-center justify-center md:justify-start gap-3 mb-4 w-full" style={{ fontFamily: "var(--font-outfit)" }}>
               <span className="w-8 h-px bg-[var(--c-accent)]" />Über uns
             </span>
-            <h2 className="text-[var(--c-text)] font-bold leading-tight mb-6" style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
+            <h2 className="text-[var(--c-text)] font-bold leading-tight mb-6 text-center md:text-left" style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
               Wir bauen Websites,<br />die <span className="text-[var(--c-accent-text)]">verkaufen.</span>
             </h2>
 
             <div className="flex flex-col gap-4 text-[var(--c-text-3)] text-sm md:text-[0.95rem] leading-relaxed" style={{ fontFamily: "var(--font-outfit)" }}>
-              <p>
+              <p className="text-justify md:text-left">
                 Wir sind Altin & Mark — das Team hinter DigitalFrame. Mit Leidenschaft für modernes Web-Design und Technologie helfen wir Unternehmen, ihre digitale Präsenz auf das nächste Level zu bringen.
               </p>
-              <p>
+              <p className="text-justify md:text-left">
                 Von der ersten Idee bis zum fertigen Produkt — wir begleiten dich durch den gesamten Prozess und sorgen dafür, dass deine Website nicht nur schön aussieht, sondern auch messbare Ergebnisse liefert.
               </p>
             </div>
