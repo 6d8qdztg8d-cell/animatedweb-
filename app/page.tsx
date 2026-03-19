@@ -244,8 +244,9 @@ function AboutSection({ onContact }: { onContact: () => void }) {
       <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
 
-          {/* Team profiles — 2 cards = 2/3 width on desktop, 2-col on mobile */}
-          <div className="lg:col-span-2 grid grid-cols-2 gap-3 md:gap-4">
+          {/* Team profiles + tags + button — spans 2/3 */}
+          <div className="lg:col-span-2 flex flex-col gap-5">
+          <div className="grid grid-cols-2 gap-3 md:gap-4">
             {TEAM.map((person, i) => (
               <motion.div
                 key={person.name}
@@ -329,6 +330,34 @@ function AboutSection({ onContact }: { onContact: () => void }) {
             ))}
           </div>
 
+            {/* Tags + button under cards */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
+              className="flex flex-wrap items-center gap-2 md:gap-3"
+            >
+              {["Next.js", "React", "3D Design", "UI/UX", "Branding", "SEO"].map((tag) => (
+                <span
+                  key={tag}
+                  className="text-xs px-3 py-1.5 border border-[var(--c-border-3)] text-[var(--c-text-3)] hover:border-[var(--c-accent)] hover:text-[var(--c-accent-text)] transition-colors"
+                  style={{ fontFamily: "var(--font-outfit)" }}
+                >
+                  {tag}
+                </span>
+              ))}
+              <button
+                onClick={onContact}
+                className="ml-auto group flex items-center gap-3 bg-[var(--c-accent)] text-[var(--c-accent-bg)] font-bold px-5 py-2.5 text-xs tracking-widest uppercase hover:opacity-90 active:scale-95 transition-all touch-manipulation"
+                style={{ fontFamily: "var(--font-syne)" }}
+              >
+                Zusammenarbeiten
+                <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+            </motion.div>
+          </div>
+
           {/* Text column */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -352,27 +381,6 @@ function AboutSection({ onContact }: { onContact: () => void }) {
               </p>
             </div>
 
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2 mt-7">
-              {["Next.js", "React", "3D Design", "UI/UX", "Branding", "SEO"].map((tag) => (
-                <span
-                  key={tag}
-                  className="text-xs px-3 py-1.5 border border-[var(--c-border-3)] text-[var(--c-text-3)] hover:border-[var(--c-accent)] hover:text-[var(--c-accent-text)] transition-colors"
-                  style={{ fontFamily: "var(--font-outfit)" }}
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            <button
-              onClick={onContact}
-              className="mt-8 group flex items-center gap-3 bg-[var(--c-accent)] text-[var(--c-accent-bg)] font-bold px-6 py-3.5 text-sm tracking-widest uppercase hover:opacity-90 active:scale-95 transition-all touch-manipulation"
-              style={{ fontFamily: "var(--font-syne)" }}
-            >
-              Zusammenarbeiten
-              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-            </button>
           </motion.div>
 
         </div>
