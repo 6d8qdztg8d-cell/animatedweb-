@@ -228,16 +228,10 @@ function AboutSection({ onContact }: { onContact: () => void }) {
   return (
     <section id="about" className="py-12 md:py-32 bg-[var(--c-bg)] border-t border-[var(--c-border)]">
       <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-10 lg:gap-20 xl:gap-28 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-center">
 
-          {/* Team profiles column — 2 cards side by side */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="grid grid-cols-2 gap-3 md:gap-4"
-          >
+          {/* Team profiles — 2 cards = 2/3 width on desktop, 2-col on mobile */}
+          <div className="lg:col-span-2 grid grid-cols-2 gap-3 md:gap-4">
             {TEAM.map((person, i) => (
               <motion.div
                 key={person.name}
@@ -245,13 +239,10 @@ function AboutSection({ onContact }: { onContact: () => void }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
-                className="flex flex-col items-center text-center bg-[var(--c-bg-card)] border border-[var(--c-border-2)] rounded-xl p-4 md:p-6 gap-3"
+                className="flex flex-col bg-[var(--c-bg-card)] border border-[var(--c-border-2)] rounded-xl overflow-hidden"
               >
-                {/* Photo or initials */}
-                <div
-                  className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden shrink-0 flex items-center justify-center"
-                  style={{ boxShadow: "0 0 0 3px var(--c-border-2)" }}
-                >
+                {/* Full-width image */}
+                <div className="w-full aspect-[3/4] overflow-hidden">
                   {person.photo ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -260,11 +251,9 @@ function AboutSection({ onContact }: { onContact: () => void }) {
                       className="w-full h-full object-cover object-top"
                     />
                   ) : (
-                    <div
-                      className="w-full h-full flex items-center justify-center bg-[var(--c-bg-3)]"
-                    >
+                    <div className="w-full h-full flex items-center justify-center bg-[var(--c-bg-3)]">
                       <span
-                        className="font-bold text-lg text-[var(--c-accent-text)]"
+                        className="font-bold text-4xl text-[var(--c-accent-text)]"
                         style={{ fontFamily: "var(--font-syne)" }}
                       >
                         {person.initials}
@@ -273,7 +262,8 @@ function AboutSection({ onContact }: { onContact: () => void }) {
                   )}
                 </div>
 
-                <div>
+                {/* Name + role */}
+                <div className="px-3 py-3 md:px-4 md:py-4 border-t border-[var(--c-border-2)]">
                   <div
                     className="text-[var(--c-text)] font-bold text-sm md:text-base leading-tight"
                     style={{ fontFamily: "var(--font-syne)" }}
@@ -281,17 +271,15 @@ function AboutSection({ onContact }: { onContact: () => void }) {
                     {person.name}
                   </div>
                   <div
-                    className="text-[var(--c-text-3)] text-[10px] md:text-xs tracking-wider uppercase mt-1"
+                    className="text-[var(--c-text-3)] text-[10px] md:text-xs tracking-wider uppercase mt-0.5"
                     style={{ fontFamily: "var(--font-outfit)" }}
                   >
                     {person.role}
                   </div>
                 </div>
-
-                <div className="w-8 h-px bg-[var(--c-accent)] mt-auto" />
               </motion.div>
             ))}
-          </motion.div>
+          </div>
 
           {/* Text column */}
           <motion.div
