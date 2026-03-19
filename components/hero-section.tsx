@@ -13,15 +13,28 @@ export function HeroSection({ onContact }: { onContact?: () => void }) {
         fill="#CAFF00"
       />
 
-      {/* Content — flex col on mobile, grid on desktop */}
-      <div className="relative z-10 flex-1 w-full max-w-7xl mx-auto px-5 md:px-6 lg:px-10 flex flex-col justify-between lg:grid lg:grid-cols-2 lg:gap-4 lg:items-center lg:py-8">
+      {/* Robot — in-flow below text on mobile, absolute right on desktop */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.92 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.3, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+        className="order-2 relative h-[55vh] w-full lg:absolute lg:top-0 lg:right-0 lg:bottom-0 lg:h-auto lg:w-[64%]"
+      >
+        <div className="spline-wrapper w-full h-full">
+          <SplineScene
+            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+            className="w-full h-full"
+          />
+        </div>
+      </motion.div>
 
-        {/* Text content */}
+      {/* Text content — z-10 so it renders above the robot */}
+      <div className="relative z-10 flex-1 w-full max-w-7xl mx-auto px-5 md:px-6 lg:px-10 order-1 flex flex-col justify-between lg:justify-center lg:py-12">
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="order-1 pt-6 pb-0 lg:py-0"
+          className="pt-6 pb-0 lg:py-0 lg:max-w-[48%]"
         >
           <motion.span
             initial={{ opacity: 0, x: -20 }}
@@ -102,21 +115,6 @@ export function HeroSection({ onContact }: { onContact?: () => void }) {
               </div>
             ))}
           </motion.div>
-        </motion.div>
-
-        {/* 3D Robot — fills remaining height on mobile, right column on desktop */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.92 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-          className="order-2 relative h-[55vh] lg:h-[680px] w-full"
-        >
-          <div className="spline-wrapper w-full h-full">
-            <SplineScene
-              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-              className="w-full h-full"
-            />
-          </div>
         </motion.div>
       </div>
     </section>
