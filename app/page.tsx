@@ -174,34 +174,30 @@ function ThemeShowcaseSection({ theme, onToggle }: { theme: 'dark' | 'light'; on
 
       <div className="relative z-10 flex flex-col items-center gap-6 md:gap-8 py-10 md:py-14 px-5">
 
-        {/* Label — CAFF00 on both halves */}
+        {/* Label — rounded grey badge, readable on both halves */}
         <motion.span
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-3 text-[#CAFF00] text-xs tracking-[0.3em] uppercase"
-          style={{ fontFamily: "var(--font-outfit)" }}
+          className="inline-flex items-center gap-2 text-[#aaaaaa] text-[10px] tracking-[0.25em] uppercase rounded-full px-4 py-1.5"
+          style={{ fontFamily: "var(--font-outfit)", background: "rgba(30,30,30,0.85)", backdropFilter: "blur(6px)" }}
         >
-          <span className="w-8 h-px bg-[#CAFF00]" />
           Dark &amp; Light Mode
-          <span className="w-8 h-px bg-[#CAFF00]" />
         </motion.span>
 
-        {/* Heading — mix-blend-mode: difference → auto white on dark, black on light */}
+        {/* Heading — left white, right black */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
-          className="font-bold text-center leading-tight text-white select-none"
-          style={{
-            fontFamily: "var(--font-syne)",
-            fontSize: "clamp(2.2rem, 6vw, 4.5rem)",
-            mixBlendMode: "difference",
-          }}
+          className="font-bold text-center leading-tight select-none"
+          style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(2.2rem, 6vw, 4.5rem)" }}
         >
-          Dein Design. Dein Stil.
+          <span className="text-white">Dein Design.</span>
+          {" "}
+          <span className="text-[#0F0F0F]">Dein Stil.</span>
         </motion.h2>
 
         {/* Toggle + label */}
@@ -214,8 +210,8 @@ function ThemeShowcaseSection({ theme, onToggle }: { theme: 'dark' | 'light'; on
         >
           <CinematicThemeSwitcher isDark={isDark} onToggle={onToggle} />
           <span
-            className="text-[10px] tracking-[0.25em] uppercase"
-            style={{ fontFamily: "var(--font-outfit)", mixBlendMode: "difference", color: "#ffffff" }}
+            className="text-[#aaaaaa] text-[10px] tracking-[0.25em] uppercase rounded-full px-4 py-1.5"
+            style={{ fontFamily: "var(--font-outfit)", background: "rgba(30,30,30,0.85)", backdropFilter: "blur(6px)" }}
           >
             {isDark ? 'Dark Mode aktiv' : 'Light Mode aktiv'}
           </span>
