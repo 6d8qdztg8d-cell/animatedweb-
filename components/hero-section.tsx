@@ -5,6 +5,10 @@ import { Spotlight } from "@/components/ui/spotlight"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 
+function handleSplineLoad(splineApp: any) {
+  splineApp.setZoom(0.65)
+}
+
 export function HeroSection({ onContact }: { onContact?: () => void }) {
   return (
     <section className="relative min-h-[100dvh] bg-[var(--c-bg)] flex flex-col pt-14 md:pt-20">
@@ -84,14 +88,14 @@ export function HeroSection({ onContact }: { onContact?: () => void }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 0.8 }}
-            className="mt-4 md:mt-12 flex gap-5 md:gap-10 border-t border-[var(--c-border-2)] pt-4 md:pt-8"
+            className="mt-4 md:mt-12 flex gap-2 md:gap-3"
           >
             {[
               { num: "50+", label: "Projekte" },
               { num: "100%", label: "Zufrieden" },
               { num: "3×", label: "Conversions" },
             ].map((stat) => (
-              <div key={stat.label}>
+              <div key={stat.label} className="flex-1 bg-[var(--c-num)] px-3 md:px-4 py-3 md:py-3.5 rounded-md text-center md:text-left">
                 <div className="font-bold text-xl md:text-2xl text-[var(--c-text)]" style={{ fontFamily: "var(--font-syne)" }}>
                   {stat.num}
                 </div>
@@ -108,12 +112,13 @@ export function HeroSection({ onContact }: { onContact?: () => void }) {
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-          className="order-2 relative h-[55vh] w-full lg:h-[680px]"
+          className="order-2 relative h-[55vh] w-full lg:h-[560px]"
         >
-          <div className="spline-wrapper absolute inset-0 lg:-left-24">
+          <div className="spline-wrapper absolute inset-0 lg:-left-12 lg:-right-4">
             <SplineScene
               scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
               className="w-full h-full"
+              onLoad={handleSplineLoad}
             />
           </div>
         </motion.div>
