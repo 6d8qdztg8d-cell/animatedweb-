@@ -6,6 +6,7 @@ import { LumiereMockup, VertexMockup, TerraMockup } from "@/components/project-m
 import { ContactModal } from "@/components/contact-modal"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowRight, ArrowUpRight, X, Sun, Moon } from "lucide-react"
+import { CinematicThemeSwitcher } from "@/components/ui/cinematic-theme-switcher"
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -158,6 +159,93 @@ function Marquee() {
         ))}
       </div>
     </div>
+  )
+}
+
+function ThemeShowcaseSection({ theme, onToggle }: { theme: 'dark' | 'light'; onToggle: () => void }) {
+  const isDark = theme === 'dark'
+  return (
+    <section className="relative overflow-hidden border-t border-[var(--c-border)] bg-[var(--c-bg)]">
+      {/* Split background */}
+      <div className="absolute inset-0 flex pointer-events-none">
+        <div className="w-1/2 h-full bg-[#080808]" />
+        <div className="w-1/2 h-full bg-[#F7F7F3]" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-6 lg:px-10 py-16 md:py-28 flex flex-col items-center gap-10 md:gap-14">
+
+        {/* Label */}
+        <motion.span
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="inline-flex items-center gap-3 text-[#CAFF00] text-xs tracking-[0.3em] uppercase"
+          style={{ fontFamily: "var(--font-outfit)" }}
+        >
+          <span className="w-8 h-px bg-[#CAFF00]" />
+          Dark &amp; Light Mode
+          <span className="w-8 h-px bg-[#CAFF00]" />
+        </motion.span>
+
+        {/* Heading — split coloring */}
+        <motion.h2
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          className="font-bold text-center leading-tight"
+          style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(2rem, 5vw, 4.5rem)" }}
+        >
+          <span className="text-[#F0EDE8]">Dein Design.</span>
+          {" "}
+          <span className="text-[#0F0F0F]">Dein Stil.</span>
+        </motion.h2>
+
+        {/* Toggle */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.85 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+          className="flex flex-col items-center gap-4"
+        >
+          <CinematicThemeSwitcher isDark={isDark} onToggle={onToggle} />
+          <span
+            className="text-xs tracking-widest uppercase"
+            style={{ fontFamily: "var(--font-outfit)", color: isDark ? '#aaaaaa' : '#555555' }}
+          >
+            {isDark ? 'Dark Mode aktiv' : 'Light Mode aktiv'}
+          </span>
+        </motion.div>
+
+        {/* Two preview pills */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="flex gap-4 flex-wrap justify-center"
+        >
+          {[
+            { bg: '#0E0E0E', text: '#F0EDE8', label: 'Dark', accent: '#CAFF00' },
+            { bg: '#FFFFFF', text: '#0F0F0F', label: 'Light', accent: '#2E6B00' },
+          ].map((mode) => (
+            <div
+              key={mode.label}
+              className="rounded-xl px-6 py-4 flex items-center gap-3 border"
+              style={{ background: mode.bg, borderColor: mode.label === 'Dark' ? '#1a1a1a' : '#E0E0DC' }}
+            >
+              <div className="w-3 h-3 rounded-full" style={{ background: mode.accent }} />
+              <span className="text-sm font-bold tracking-widest uppercase" style={{ color: mode.text, fontFamily: "var(--font-syne)" }}>
+                {mode.label}
+              </span>
+            </div>
+          ))}
+        </motion.div>
+
+      </div>
+    </section>
   )
 }
 
@@ -570,6 +658,7 @@ export default function Page() {
       <Navbar onContact={() => setModalOpen(true)} theme={theme} onThemeToggle={toggleTheme} />
       <div id="hero"><HeroSection onContact={() => setModalOpen(true)} /></div>
       <Marquee />
+      <ThemeShowcaseSection theme={theme} onToggle={toggleTheme} />
       <LeistungenSection />
       <AboutSection onContact={() => setModalOpen(true)} />
       <ProjectsSection />
