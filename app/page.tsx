@@ -215,14 +215,26 @@ const TEAM = [
     role: "Design & Development",
     photo: "/projects/porträit.jpg",
     initials: "AR",
-    bio: "Spezialist für moderne Web-Erlebnisse mit Fokus auf 3D-Interaktion, Performance und konvertierendes Design.",
+    bio: "Spezialist für moderne Web-Erlebnisse mit Fokus auf 3D & Performance.",
+    facts: [
+      { label: "Standort", value: "Schweiz" },
+      { label: "Sprachen", value: "DE · EN · ALB" },
+      { label: "Hobbys", value: "Design, Sport, Tech" },
+      { label: "Erfahrung", value: "4+ Jahre" },
+    ],
   },
   {
     name: "Mark Mirakaj",
     role: "Design & Development",
     photo: null,
     initials: "MM",
-    bio: "Kreativer Kopf hinter visuellen Konzepten und Markenerlebnissen — von der ersten Idee bis zum fertigen Pixel.",
+    bio: "Kreativer Kopf für visuelle Konzepte und starke Markenerlebnisse.",
+    facts: [
+      { label: "Standort", value: "Schweiz" },
+      { label: "Sprachen", value: "DE · EN · ALB" },
+      { label: "Hobbys", value: "Kreativität, Musik, Design" },
+      { label: "Erfahrung", value: "4+ Jahre" },
+    ],
   },
 ]
 
@@ -230,7 +242,7 @@ function AboutSection({ onContact }: { onContact: () => void }) {
   return (
     <section id="about" className="py-12 md:py-32 bg-[var(--c-bg)] border-t border-[var(--c-border)]">
       <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
 
           {/* Team profiles — 2 cards = 2/3 width on desktop, 2-col on mobile */}
           <div className="lg:col-span-2 grid grid-cols-2 gap-3 md:gap-4">
@@ -284,15 +296,35 @@ function AboutSection({ onContact }: { onContact: () => void }) {
                 </div>
 
                 {/* Divider */}
-                <div className="w-8 h-px bg-[var(--c-border-3)] mx-auto" />
+                <div className="w-full h-px bg-[var(--c-border-2)]" />
 
                 {/* Bio */}
                 <p
-                  className="text-[var(--c-text-3)] text-xs md:text-sm leading-relaxed text-center"
+                  className="text-[var(--c-text-3)] text-xs leading-relaxed text-center"
                   style={{ fontFamily: "var(--font-outfit)" }}
                 >
                   {person.bio}
                 </p>
+
+                {/* Facts */}
+                <div className="flex flex-col gap-2 mt-auto">
+                  {person.facts.map((fact) => (
+                    <div key={fact.label} className="flex items-center justify-between gap-2 py-1.5 border-t border-[var(--c-border-2)]">
+                      <span
+                        className="text-[var(--c-text-4)] text-[10px] tracking-widest uppercase"
+                        style={{ fontFamily: "var(--font-outfit)" }}
+                      >
+                        {fact.label}
+                      </span>
+                      <span
+                        className="text-[var(--c-text)] text-xs font-medium text-right"
+                        style={{ fontFamily: "var(--font-outfit)" }}
+                      >
+                        {fact.value}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </motion.div>
             ))}
           </div>
