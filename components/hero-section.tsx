@@ -111,17 +111,19 @@ export function HeroSection({ onContact }: { onContact?: () => void }) {
           </motion.div>
         </motion.div>
 
-        {/* 3D Robot — below text on mobile, right column on desktop */}
+        {/* 3D Robot — hidden on mobile, right column on desktop */}
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-          className="order-2 relative h-[200px] sm:h-[360px] md:h-[440px] lg:h-[680px] w-full mt-4 lg:mt-0"
+          className="order-2 relative hidden sm:block h-[360px] md:h-[440px] lg:h-[680px] w-full"
         >
-          <SplineScene
-            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-            className="w-full h-full"
-          />
+          <div className="spline-wrapper w-full h-full">
+            <SplineScene
+              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+              className="w-full h-full"
+            />
+          </div>
         </motion.div>
       </div>
     </section>

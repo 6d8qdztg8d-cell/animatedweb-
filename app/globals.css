@@ -154,3 +154,8 @@
 .animate-spotlight {
   animation: var(--animate-spotlight);
 }
+
+/* Force Spline canvas to match page background */
+.spline-wrapper canvas {
+  background: #080808 !important;
+}
