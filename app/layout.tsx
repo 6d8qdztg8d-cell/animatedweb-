@@ -1,32 +1,34 @@
-import { Geist, Geist_Mono } from "next/font/google"
-
+import type { Metadata } from "next"
+import { Syne, Outfit } from "next/font/google"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
-const fontSans = Geist({
+const syne = Syne({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-syne",
+  weight: ["400", "500", "600", "700", "800"],
 })
 
-const fontMono = Geist_Mono({
+const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-outfit",
+  weight: ["300", "400", "500", "600"],
 })
+
+export const metadata: Metadata = {
+  title: "Web Studio — Moderne Digitale Erlebnisse",
+  description: "Premium Web Development mit interaktiven 3D-Erlebnissen",
+}
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", fontSans.variable)}
-    >
-      <body>
-        <ThemeProvider>{children}</ThemeProvider>
+    <html lang="de" suppressHydrationWarning className={cn(syne.variable, outfit.variable)}>
+      <body className="antialiased bg-[#080808] text-[#F0EDE8]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
+        {children}
       </body>
     </html>
   )
