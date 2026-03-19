@@ -16,34 +16,11 @@ const MARQUEE_ITEMS = [
 
 const NAV_LINKS = [
   { label: "Leistungen", href: "leistungen" },
-  { label: "Styles", href: "styles" },
+  { label: "Über mich", href: "about" },
   { label: "Projekte", href: "projects" },
   { label: "Kontakt", href: "contact" },
 ]
 
-const STYLES = [
-  {
-    id: "elegant",
-    label: "Elegant",
-    tagline: "Clean. Minimal. Premium.",
-    description: "Feines Typografie-System, viel Weißraum und dezente Akzente. Ideal für Luxusmarken, Kanzleien und Premium-Dienstleister.",
-    bg: "#F5F0E8", text: "#1a1a1a", accent: "#B8860B", font: "serif",
-  },
-  {
-    id: "modern",
-    label: "Modern",
-    tagline: "Smooth. Bold. Apple-inspired.",
-    description: "Dunkle Glasmorphismus-Effekte, saubere Linien und flüssige Animationen. Für Tech-Startups und innovative Marken.",
-    bg: "#0A0A0F", text: "#ffffff", accent: "#2563EB", font: "var(--font-syne)",
-  },
-  {
-    id: "nature",
-    label: "Nature",
-    tagline: "Organic. Calm. Authentic.",
-    description: "Erdtöne, organische Formen und ruhige Typografie. Perfekt für Bio-Brands, Coaches und nachhaltige Unternehmen.",
-    bg: "#F0EDE4", text: "#2D3B1F", accent: "#5C7A3E", font: "Georgia, serif",
-  },
-]
 
 const PROJECTS = [
   { name: "Lumière Boutique", category: "Elegant · E-Commerce", year: "2024", accent: "#B8860B", Mockup: LumiereMockup, image: "/projects/lumiere.jpg" },
@@ -217,90 +194,87 @@ function LeistungenSection() {
   )
 }
 
-function StylesSection({ onContact }: { onContact: () => void }) {
-  const [selected, setSelected] = useState<string | null>(null)
-
+function AboutSection({ onContact }: { onContact: () => void }) {
   return (
-    <section id="styles" className="py-6 md:py-10 md:py-32 bg-[#080808]">
+    <section id="about" className="py-10 md:py-32 bg-[#080808] border-t border-[#111]">
       <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-10">
-        <div className="mb-7 md:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-          <div>
-            <span className="text-[#CAFF00] text-xs tracking-[0.3em] uppercase inline-flex items-center gap-3" style={{ fontFamily: "var(--font-outfit)" }}>
-              <span className="w-8 h-px bg-[#CAFF00]" />Design Stile
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+
+          {/* Photo */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="relative flex justify-center lg:justify-start"
+          >
+            {/* Accent background shape */}
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-8 lg:translate-x-0 w-[240px] md:w-[300px] lg:w-[340px] h-[300px] md:h-[380px] lg:h-[440px] bg-[#CAFF00]/10 rounded-2xl" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/projects/portrait-nobg.png"
+              alt="DigitalFrame – Gründer"
+              className="relative z-10 w-[220px] md:w-[280px] lg:w-[340px] object-contain drop-shadow-2xl"
+            />
+            {/* Floating badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              className="absolute bottom-6 right-4 md:right-8 lg:-right-4 z-20 bg-[#0E0E0E] border border-[#1a1a1a] rounded-xl px-4 py-3 shadow-xl"
+            >
+              <div className="text-[#CAFF00] font-bold text-lg" style={{ fontFamily: "var(--font-syne)" }}>50+</div>
+              <div className="text-[#999] text-xs tracking-widest uppercase" style={{ fontFamily: "var(--font-outfit)" }}>Projekte</div>
+            </motion.div>
+          </motion.div>
+
+          {/* Text */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          >
+            <span className="text-[#CAFF00] text-xs tracking-[0.3em] uppercase inline-flex items-center gap-3 mb-4" style={{ fontFamily: "var(--font-outfit)" }}>
+              <span className="w-8 h-px bg-[#CAFF00]" />Über mich
             </span>
-            <h2 className="mt-4 text-[#F0EDE8] font-bold leading-tight" style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(2rem, 4vw, 3.5rem)" }}>
-              Drei Welten.<br />Eine Qualität.
+            <h2 className="text-[#F0EDE8] font-bold leading-tight mb-5" style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
+              Ich baue Websites,<br />die <span className="text-[#CAFF00]">verkaufen.</span>
             </h2>
-          </div>
-          <p className="text-[#aaa] max-w-sm leading-relaxed text-sm md:text-base" style={{ fontFamily: "var(--font-outfit)" }}>
-            Jedes Unternehmen ist einzigartig. Wähle deinen Stil — wir setzen ihn um.
-          </p>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#111]">
-          {STYLES.map((style) => {
-            const isSelected = selected === style.id
-            return (
-              <motion.div
-                key={style.id}
-                onClick={() => setSelected(isSelected ? null : style.id)}
-                whileTap={{ scale: 0.98 }}
-                className="group relative bg-[#080808] p-5 md:p-8 flex flex-col gap-4 md:gap-6 cursor-pointer transition-colors"
-                style={{ backgroundColor: isSelected ? "#0E0E0E" : undefined }}
-              >
-                {/* Selected border */}
-                {isSelected && (
-                  <motion.div
-                    layoutId="style-border"
-                    className="absolute inset-0 border-2 pointer-events-none"
-                    style={{ borderColor: style.accent }}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                  />
-                )}
+            <div className="flex flex-col gap-4 text-[#999] text-sm md:text-base leading-relaxed" style={{ fontFamily: "var(--font-outfit)" }}>
+              <p>
+                Hallo, ich bin der Gründer von DigitalFrame. Mit Leidenschaft für modernes Web-Design und Technologie helfe ich Unternehmen, ihre digitale Präsenz auf das nächste Level zu bringen.
+              </p>
+              <p>
+                Von der ersten Idee bis zum fertigen Produkt — ich begleite dich durch den gesamten Prozess und sorge dafür, dass deine Website nicht nur schön aussieht, sondern auch messbare Ergebnisse liefert.
+              </p>
+            </div>
 
-                {/* Mini preview */}
-                <div className="w-full h-28 md:h-40 rounded-sm overflow-hidden flex items-center justify-center relative" style={{ backgroundColor: style.bg }}>
-                  <div className="absolute inset-0 flex flex-col gap-2 p-4 justify-end">
-                    <div className="w-2/3 h-3 rounded-full" style={{ backgroundColor: style.text, opacity: 0.15 }} />
-                    <div className="w-1/2 h-2 rounded-full" style={{ backgroundColor: style.text, opacity: 0.08 }} />
-                  </div>
-                  <span className="font-bold text-3xl relative z-10" style={{ color: style.text, fontFamily: style.font, opacity: 0.9 }}>
-                    {style.label}
-                  </span>
-                  <span className="absolute bottom-3 right-3 text-xs font-bold px-2 py-1 rounded text-white" style={{ backgroundColor: style.accent, fontFamily: "var(--font-outfit)" }}>
-                    {style.tagline.split(".")[0]}
-                  </span>
-                </div>
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2 mt-6">
+              {["Next.js", "React", "3D Design", "UI/UX", "Branding", "SEO"].map((tag) => (
+                <span
+                  key={tag}
+                  className="text-xs px-3 py-1.5 border border-[#1f1f1f] text-[#666] rounded-full"
+                  style={{ fontFamily: "var(--font-outfit)" }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
 
-                <div>
-                  <h3 className="text-[#F0EDE8] font-bold text-xl mb-2" style={{ fontFamily: "var(--font-syne)" }}>{style.label}</h3>
-                  <p className="text-[#999] text-sm leading-relaxed" style={{ fontFamily: "var(--font-outfit)" }}>{style.description}</p>
-                </div>
+            <button
+              onClick={onContact}
+              className="mt-8 group flex items-center gap-3 bg-[#CAFF00] text-[#080808] font-bold px-6 py-3.5 text-sm tracking-widest uppercase hover:bg-white active:scale-95 transition-all touch-manipulation"
+              style={{ fontFamily: "var(--font-syne)" }}
+            >
+              Zusammenarbeiten
+              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+            </button>
+          </motion.div>
 
-                <AnimatePresence>
-                  {isSelected && (
-                    <motion.button
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 8 }}
-                      onClick={(e) => { e.stopPropagation(); onContact() }}
-                      className="mt-auto flex items-center gap-2 font-bold text-xs tracking-widest uppercase px-4 py-3 transition-colors"
-                      style={{ backgroundColor: style.accent, color: "#fff", fontFamily: "var(--font-syne)" }}
-                    >
-                      Diesen Stil wählen <ArrowRight size={13} />
-                    </motion.button>
-                  )}
-                </AnimatePresence>
-
-                {!isSelected && (
-                  <div className="mt-auto flex items-center gap-2 text-[#333] group-hover:text-[#CAFF00] transition-colors text-xs tracking-widest uppercase" style={{ fontFamily: "var(--font-outfit)" }}>
-                    Auswählen <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
-                  </div>
-                )}
-              </motion.div>
-            )
-          })}
         </div>
       </div>
     </section>
@@ -472,7 +446,7 @@ export default function Page() {
       <div id="hero"><HeroSection onContact={() => setModalOpen(true)} /></div>
       <Marquee />
       <LeistungenSection />
-      <StylesSection onContact={() => setModalOpen(true)} />
+      <AboutSection onContact={() => setModalOpen(true)} />
       <ProjectsSection />
       <CtaSection onContact={() => setModalOpen(true)} />
       <Footer onContact={() => setModalOpen(true)} />
