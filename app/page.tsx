@@ -647,7 +647,7 @@ export default function Page() {
     <>
       <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} />
       <Navbar onContact={() => setModalOpen(true)} theme={theme} onThemeToggle={toggleTheme} />
-      <div id="hero"><HeroSection onContact={() => setModalOpen(true)} /></div>
+      <div id="hero"><HeroSection onContact={() => setModalOpen(true)} theme={theme} /></div>
       <Marquee />
       <ThemeShowcaseSection theme={theme} onToggle={toggleTheme} />
       <LeistungenSection />

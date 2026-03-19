@@ -4,12 +4,38 @@ import { SplineScene } from "@/components/ui/splite"
 import { Spotlight } from "@/components/ui/spotlight"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
+import { useRef, useEffect } from "react"
 
-function handleSplineLoad(splineApp: any) {
-  splineApp.setZoom(0.65)
-}
+const DARK_BG  = 0x080808
+const LIGHT_BG = 0xF7F7F3
 
-export function HeroSection({ onContact }: { onContact?: () => void }) {
+export function HeroSection({ onContact, theme }: { onContact?: () => void; theme?: 'dark' | 'light' }) {
+  const splineRef = useRef<any>(null)
+
+  // Sync Spline renderer clear-color with theme — no CSS delay mismatch
+  useEffect(() => {
+    const app = splineRef.current
+    if (!app) return
+    try {
+      const renderer = app.renderer ?? app._renderer
+      if (renderer?.setClearColor) {
+        renderer.setClearColor(theme === 'light' ? LIGHT_BG : DARK_BG, 1)
+      }
+    } catch (_) {}
+  }, [theme])
+
+  function handleSplineLoad(splineApp: any) {
+    splineApp.setZoom(0.65)
+    splineRef.current = splineApp
+    // Set initial color immediately on load
+    try {
+      const renderer = splineApp.renderer ?? splineApp._renderer
+      if (renderer?.setClearColor) {
+        renderer.setClearColor(theme === 'light' ? LIGHT_BG : DARK_BG, 1)
+      }
+    } catch (_) {}
+  }
+
   return (
     <section className="relative min-h-[100dvh] bg-[var(--c-bg)] flex flex-col pt-14 md:pt-20">
       <Spotlight
