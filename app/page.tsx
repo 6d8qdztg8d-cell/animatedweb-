@@ -191,7 +191,7 @@ function LeistungenSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#111]">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-px bg-[#111]">
           {items.map((item) => (
             <motion.div
               key={item.num}
