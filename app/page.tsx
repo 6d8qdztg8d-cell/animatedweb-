@@ -186,19 +186,37 @@ function ThemeShowcaseSection({ theme, onToggle }: { theme: 'dark' | 'light'; on
           Dark &amp; Light Mode
         </motion.span>
 
-        {/* Heading — left white, right black */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
-          className="font-bold text-center leading-tight select-none"
-          style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(2.2rem, 6vw, 4.5rem)" }}
-        >
-          <span className="text-white">Dein Design.</span>
-          {" "}
-          <span className="text-[#0F0F0F]">Dein Stil.</span>
-        </motion.h2>
+        {/* Heading — each phrase centered in its own half */}
+        <div className="w-full flex">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
+            className="w-1/2 flex items-center justify-center px-4"
+          >
+            <span
+              className="font-bold leading-tight text-white text-center"
+              style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(1.6rem, 4vw, 4rem)" }}
+            >
+              Dein Design.
+            </span>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
+            className="w-1/2 flex items-center justify-center px-4"
+          >
+            <span
+              className="font-bold leading-tight text-[#0F0F0F] text-center"
+              style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(1.6rem, 4vw, 4rem)" }}
+            >
+              Dein Stil.
+            </span>
+          </motion.div>
+        </div>
 
         {/* Toggle + label */}
         <motion.div
