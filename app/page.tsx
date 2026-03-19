@@ -165,21 +165,21 @@ function Marquee() {
 function ThemeShowcaseSection({ theme, onToggle }: { theme: 'dark' | 'light'; onToggle: () => void }) {
   const isDark = theme === 'dark'
   return (
-    <section className="relative overflow-hidden border-t border-[var(--c-border)] bg-[var(--c-bg)]">
-      {/* Split background */}
+    <section className="relative overflow-hidden border-t border-[var(--c-border)]">
+      {/* Split background — full bleed */}
       <div className="absolute inset-0 flex pointer-events-none">
         <div className="w-1/2 h-full bg-[#080808]" />
         <div className="w-1/2 h-full bg-[#F7F7F3]" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-6 lg:px-10 py-16 md:py-28 flex flex-col items-center gap-10 md:gap-14">
+      <div className="relative z-10 flex flex-col items-center gap-6 md:gap-8 py-10 md:py-14 px-5">
 
-        {/* Label */}
+        {/* Label — CAFF00 on both halves */}
         <motion.span
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           className="inline-flex items-center gap-3 text-[#CAFF00] text-xs tracking-[0.3em] uppercase"
           style={{ fontFamily: "var(--font-outfit)" }}
         >
@@ -188,60 +188,37 @@ function ThemeShowcaseSection({ theme, onToggle }: { theme: 'dark' | 'light'; on
           <span className="w-8 h-px bg-[#CAFF00]" />
         </motion.span>
 
-        {/* Heading — split coloring */}
+        {/* Heading — mix-blend-mode: difference → auto white on dark, black on light */}
         <motion.h2
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-          className="font-bold text-center leading-tight"
-          style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(2rem, 5vw, 4.5rem)" }}
-        >
-          <span className="text-[#F0EDE8]">Dein Design.</span>
-          {" "}
-          <span className="text-[#0F0F0F]">Dein Stil.</span>
-        </motion.h2>
-
-        {/* Toggle */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-          className="flex flex-col items-center gap-4"
-        >
-          <CinematicThemeSwitcher isDark={isDark} onToggle={onToggle} />
-          <span
-            className="text-xs tracking-widest uppercase"
-            style={{ fontFamily: "var(--font-outfit)", color: isDark ? '#aaaaaa' : '#555555' }}
-          >
-            {isDark ? 'Dark Mode aktiv' : 'Light Mode aktiv'}
-          </span>
-        </motion.div>
-
-        {/* Two preview pills */}
-        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="flex gap-4 flex-wrap justify-center"
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
+          className="font-bold text-center leading-tight text-white select-none"
+          style={{
+            fontFamily: "var(--font-syne)",
+            fontSize: "clamp(2.2rem, 6vw, 4.5rem)",
+            mixBlendMode: "difference",
+          }}
         >
-          {[
-            { bg: '#0E0E0E', text: '#F0EDE8', label: 'Dark', accent: '#CAFF00' },
-            { bg: '#FFFFFF', text: '#0F0F0F', label: 'Light', accent: '#2E6B00' },
-          ].map((mode) => (
-            <div
-              key={mode.label}
-              className="rounded-xl px-6 py-4 flex items-center gap-3 border"
-              style={{ background: mode.bg, borderColor: mode.label === 'Dark' ? '#1a1a1a' : '#E0E0DC' }}
-            >
-              <div className="w-3 h-3 rounded-full" style={{ background: mode.accent }} />
-              <span className="text-sm font-bold tracking-widest uppercase" style={{ color: mode.text, fontFamily: "var(--font-syne)" }}>
-                {mode.label}
-              </span>
-            </div>
-          ))}
+          Dein Design. Dein Stil.
+        </motion.h2>
+
+        {/* Toggle + label */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+          className="flex flex-col items-center gap-3"
+        >
+          <CinematicThemeSwitcher isDark={isDark} onToggle={onToggle} />
+          <span
+            className="text-[10px] tracking-[0.25em] uppercase"
+            style={{ fontFamily: "var(--font-outfit)", mixBlendMode: "difference", color: "#ffffff" }}
+          >
+            {isDark ? 'Dark Mode aktiv' : 'Light Mode aktiv'}
+          </span>
         </motion.div>
 
       </div>
