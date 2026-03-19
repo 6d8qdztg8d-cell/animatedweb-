@@ -77,7 +77,7 @@ function Navbar({ onContact }: { onContact: () => void }) {
             className="text-[#F0EDE8] font-bold text-base md:text-lg tracking-tight"
             style={{ fontFamily: "var(--font-syne)" }}
           >
-            WEB<span className="text-[#CAFF00]">.</span>STUDIO
+            DigitalFrame
           </button>
 
           {/* Desktop nav */}
@@ -450,10 +450,10 @@ function Footer({ onContact }: { onContact: () => void }) {
     <footer className="border-t border-[#111] bg-[#060606] py-10">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col md:flex-row items-center justify-between gap-4">
         <span className="text-[#F0EDE8] font-bold text-base" style={{ fontFamily: "var(--font-syne)" }}>
-          WEB<span className="text-[#CAFF00]">.</span>STUDIO
+          DigitalFrame
         </span>
         <button onClick={onContact} className="text-[#333] hover:text-[#CAFF00] text-xs tracking-wide transition-colors" style={{ fontFamily: "var(--font-outfit)" }}>
-          © 2025 Web.Studio · Kontakt aufnehmen →
+          © 2025 DigitalFrame · Kontakt aufnehmen →
         </button>
       </div>
     </footer>

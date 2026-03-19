@@ -16,7 +16,7 @@ const outfit = Outfit({
 })
 
 export const metadata: Metadata = {
-  title: "Web Studio — Moderne Digitale Erlebnisse",
+  title: "DigitalFrame — Moderne Digitale Erlebnisse",
   description: "Premium Web Development mit interaktiven 3D-Erlebnissen",
   viewport: {
     width: "device-width",

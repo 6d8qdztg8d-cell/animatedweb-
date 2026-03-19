@@ -38,7 +38,7 @@ export function HeroSection({ onContact }: { onContact?: () => void }) {
             style={{ fontFamily: "var(--font-outfit)" }}
           >
             <span className="w-8 h-px bg-[#CAFF00]" />
-            Web Development Studio
+            DigitalFrame
           </motion.span>
 
           <h1
