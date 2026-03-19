@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react"
 
 export function HeroSection({ onContact }: { onContact?: () => void }) {
   return (
-    <section className="relative min-h-screen bg-[var(--c-bg)] overflow-hidden flex flex-col pt-14 md:pt-20">
+    <section className="relative min-h-[100dvh] bg-[var(--c-bg)] overflow-hidden flex flex-col pt-14 md:pt-20">
       <Spotlight
         className="-top-40 left-0 md:left-40 md:-top-20"
         fill="#CAFF00"
@@ -21,7 +21,7 @@ export function HeroSection({ onContact }: { onContact?: () => void }) {
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="order-1 pt-6 pb-4 lg:py-0"
+          className="order-1 pt-6 pb-0 lg:py-0"
         >
           <motion.span
             initial={{ opacity: 0, x: -20 }}
@@ -109,7 +109,7 @@ export function HeroSection({ onContact }: { onContact?: () => void }) {
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-          className="order-2 flex-1 lg:flex-none relative lg:h-[680px] min-h-[40vh] lg:min-h-0 w-full"
+          className="order-2 flex-1 lg:flex-none relative lg:h-[680px] min-h-[55vh] lg:min-h-0 w-full"
         >
           <div className="spline-wrapper w-full h-full">
             <SplineScene
