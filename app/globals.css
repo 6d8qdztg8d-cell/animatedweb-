@@ -206,10 +206,11 @@ body {
   animation: var(--animate-spotlight);
 }
 
-/* Desktop zoom-out for better proportions */
+/* Desktop scale-down via font-size — scales all rem-based sizes without
+   breaking mouse coordinate systems (Spline cursor tracking stays correct) */
 @media (min-width: 1024px) {
   html {
-    zoom: 0.85;
+    font-size: 85%;
   }
 }
 
