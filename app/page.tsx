@@ -198,7 +198,7 @@ function AboutSection({ onContact }: { onContact: () => void }) {
   return (
     <section id="about" className="py-12 md:py-32 bg-[#080808] border-t border-[#111]">
       <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-10 lg:gap-20 xl:gap-28 items-end">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-10 lg:gap-20 xl:gap-28 items-center">
 
           {/* Portrait column */}
           <motion.div
@@ -243,7 +243,7 @@ function AboutSection({ onContact }: { onContact: () => void }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-            className="pb-0 lg:pb-6"
+            className=""
           >
             <span className="text-[#CAFF00] text-xs tracking-[0.3em] uppercase inline-flex items-center gap-3 mb-4" style={{ fontFamily: "var(--font-outfit)" }}>
               <span className="w-8 h-px bg-[#CAFF00]" />Über mich
