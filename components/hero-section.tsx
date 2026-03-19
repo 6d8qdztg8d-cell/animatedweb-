@@ -116,7 +116,7 @@ export function HeroSection({ onContact }: { onContact?: () => void }) {
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-          className="order-2 relative h-[200px] sm:h-[360px] md:h-[440px] lg:h-[680px] w-full mt-4 lg:mt-0"
+          className="order-2 relative h-[33vh] sm:h-[360px] md:h-[440px] lg:h-[680px] w-full mt-4 lg:mt-0"
         >
           <div className="spline-wrapper w-full h-full">
             <SplineScene
